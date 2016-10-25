@@ -11,10 +11,13 @@ public class PlayerScript : MonoBehaviour{
     public bool isDead = false;
     public string statUrl = "Assests/Data Sheets/PlayerStats.csv";
     private BoxCollider2D boxcol;
-    private float x_width;
-    private float y_height;
-    private float x_offset;
-    private float y_offset;
+    //private float x_width;
+    //private float y_height;
+    //private float x_offset;
+    //private float y_offset;
+    public float JumpSpeed;
+    public float JumpDamping = 0.1f;
+    public bool isOnGround = false;
 
     //all variables used to check for physics with collider
     int layerMask;
@@ -25,10 +28,10 @@ public class PlayerScript : MonoBehaviour{
     float acceleration = 0.4f;
     int horizontalRays = 6;
     int verticalRays = 4;
-    int margin = 2;
-    float gravity = 0.5f;
-    float maxSpeed = 0.1f;
-    float maxfall = 0.2f;
+    int margin = 1;
+    float gravity = 6f;
+    float maxSpeed = 0.0f;
+    float maxfall = 0.0f;
 
     //creates a dictionary that stores float values inside the key "string"
     //public Dictionary<string, int[]> statTable;
@@ -49,11 +52,11 @@ public class PlayerScript : MonoBehaviour{
 
         Debug.Log(maxHealth);
         curHealth = maxHealth;
-        x_width = GetComponent<BoxCollider2D>().size.x;
-        y_height = GetComponent<BoxCollider2D>().size.y;
-        x_offset = GetComponent<BoxCollider2D>().offset.x;
-        y_offset = GetComponent<BoxCollider2D>().offset.y;
-        boxcol = player.GetComponent<BoxCollider2D>();
+        //x_width = GetComponent<BoxCollider2D>().size.x;
+        //y_height = GetComponent<BoxCollider2D>().size.y;
+        //x_offset = GetComponent<BoxCollider2D>().offset.x;
+        //y_offset = GetComponent<BoxCollider2D>().offset.y;
+        //boxcol = player.GetComponent<BoxCollider2D>();
     }
 
     void start()
@@ -83,9 +86,10 @@ public class PlayerScript : MonoBehaviour{
     //fix movement to refresh 1 per frame
     void FixedUpdate()
     {
-        box = new Rect(GetComponent<Collider2D>().bounds.min.x, GetComponent<Collider2D>().bounds.min.y, GetComponent<Collider2D>().bounds.size.x, GetComponent<Collider2D>().bounds.size.y);
+        //box = new Rect(GetComponent<Collider2D>().bounds.min.x, GetComponent<Collider2D>().bounds.min.y, GetComponent<Collider2D>().bounds.size.x, GetComponent<Collider2D>().bounds.size.y);
+        box = new Rect(GetComponent<Collider>().bounds.min.x, GetComponent<Collider>().bounds.min.y, GetComponent<Collider>().bounds.size.x, GetComponent<Collider>().bounds.size.y);
         //check for center and slope
-   
+
         //Gravity 
 
         //used to predict location when we check for ground
@@ -99,9 +103,10 @@ public class PlayerScript : MonoBehaviour{
         //we start the ray from the center of player box -- so it can detect edges
         if (grounded || falling) { //if only when player is in air
             Vector3 startPoint = new Vector3(box.xMin + margin, box.center.y, transform.position.z);
-            Vector3 endPoint = new Vector3(box.xMax - margin, box.center.y, transform.position.z);
+            Vector3 endPoint = new Vector3(box.xMin - margin, box.center.y, transform.position.z);
             RaycastHit hitInfo;
-            float distance = box.height / 2 + (grounded ? margin : Mathf.Abs(velocity.y * Time.deltaTime));
+            //float distance = box.height + 1;
+            float distance = box.height/2 + (grounded ? margin : Mathf.Abs(velocity.y * Time.deltaTime));
             //how long the ray will be based
 
             bool connected = false; //check if we are grounded 
@@ -110,6 +115,7 @@ public class PlayerScript : MonoBehaviour{
                 Vector3 origin = Vector3.Lerp(startPoint, endPoint, lerpAmount);
                 Ray ray = new Ray(origin, Vector3.down);
                 connected = Physics.Raycast(ray, out hitInfo, distance, layerMask);
+                Debug.DrawRay(startPoint, Vector3.down, Color.blue);
                 if (connected) {
                     grounded = true;
                     falling = false;
@@ -120,7 +126,12 @@ public class PlayerScript : MonoBehaviour{
             }
             if (!connected)
             {
+                Debug.Log("Air");
                 grounded = false;
+            }
+            else
+            {
+                Debug.Log("ground");
             }
         
         }
@@ -159,6 +170,7 @@ public class PlayerScript : MonoBehaviour{
                 Ray ray = new Ray(origin, direction);
 
                 connected = Physics.Raycast(ray, out hitInfo, sideRayLength);
+                Debug.Log(hitInfo);
                 if (connected) {
                     transform.Translate(direction * (hitInfo.distance - box.width / 2));
                     velocity = new Vector2(0, velocity.y);
@@ -170,9 +182,17 @@ public class PlayerScript : MonoBehaviour{
         //movement and action
         if (Input.GetKey(KeyCode.RightArrow))
         {
+            Debug.Log("going right");
             //anim.SetBool("right", true);
             //anim.SetBool("left", false);
-            transform.Translate(Vector2.right * Speed);
+            if (isOnGround)
+            {
+                transform.Translate(Vector2.right * Speed/2 * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Vector2.right * Speed/3 * Time.deltaTime);
+            }
             //facedirection = "right";
             //anim.SetBool("WalkRight", true);
         }
@@ -183,9 +203,17 @@ public class PlayerScript : MonoBehaviour{
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
+            Debug.Log("going left");
             //anim.SetBool("right", false);
             //anim.SetBool("left", true);
-            transform.Translate(Vector2.left * Speed);
+            if (isOnGround)
+            {
+                transform.Translate(Vector2.left * Speed/2 * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Vector2.left * Speed/3 * Time.deltaTime);
+            }
             //facedirection = "left";
             //anim.SetBool("WalkLeft", true);
         }
@@ -193,7 +221,19 @@ public class PlayerScript : MonoBehaviour{
         {
             //anim.SetBool("WalkLeft", false);
         }
+        if (Input.GetKey(KeyCode.Space) && isOnGround)
+        {
+           
+            Jump();
+            
+        }
 
+        if (!isOnGround)
+        {
+
+            Physics.gravity = new Vector3(0, -20.0F, 0);
+        }
+        /*
         if (Input.GetKey(KeyCode.DownArrow))
         {
             //anim.SetBool("up", false);
@@ -215,8 +255,9 @@ public class PlayerScript : MonoBehaviour{
             //restore the collider box height
 
         }
-
+        */
     }
+  
 
     public void TakeDamage(int amount) {
         
@@ -267,6 +308,26 @@ public class PlayerScript : MonoBehaviour{
         transform.Translate(velocity * Time.deltaTime);
     }
 
+    void OnCollisionEnter()
+    {
+        Debug.Log("is on ground");
+        isOnGround = true;
+    }
+    void OnCollisionExit()
+    {
+        Debug.Log("is off ground");
+        isOnGround = false;
+    }
+
+  
+    void Jump()
+    {
+
+        Vector3 v3 = GetComponent<Rigidbody>().velocity;
+        v3.y = 0;
+        GetComponent<Rigidbody>().velocity = v3;
+        GetComponent<Rigidbody>().AddForce(new Vector2(0, JumpSpeed), ForceMode.Impulse);
 
 
+    }
 }
