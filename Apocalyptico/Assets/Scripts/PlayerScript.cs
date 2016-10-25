@@ -308,11 +308,23 @@ public class PlayerScript : MonoBehaviour{
         transform.Translate(velocity * Time.deltaTime);
     }
 
-    void OnCollisionEnter()
-    {
-        Debug.Log("is on ground");
-        isOnGround = true;
+	void OnCollisionEnter(Collision col) //only checks enter
+	{	
+		if(col.gameObject.tag == "ground"){
+			Debug.Log("is on ground");
+			isOnGround = true;
+		}
+
     }
+	void OnCollisionStay(Collision col) //checks stay because player wont reenter
+	{
+		if (col.gameObject.tag == "ground"){
+			Debug.Log("is on ground");
+			isOnGround = true;
+		}
+
+	}
+
     void OnCollisionExit()
     {
         Debug.Log("is off ground");
