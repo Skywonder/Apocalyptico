@@ -2,27 +2,45 @@
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-    public float speed;
+    public float speed = 3f;
     public Transform player;
+    public bool isOnGround = false;    
 
-	// Use this for initialization
-	void Start () {
-        speed = -3f;
+    // Use this for initialization
+    void Start () {
+        player = GameObject.Find("Player").GetComponent<Transform>();
         GetComponent<SpriteRenderer>().flipX = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        Vector2 position = transform.position;
+        if (!isOnGround)
+        {
+            Physics2D.gravity = new Vector2(0, -10f);
+        } else
+        {
+            //transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime); // drop then follows
+        }
 
-        position = new Vector2(position.x + speed * Time.deltaTime, position.y);
-
-        transform.position = position;
-	}
+        if (transform.position.x < player.position.x)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        } else
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+        
+        transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime); // strafes towards
+    }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        GameObject collidedWith = coll.transform.gameObject;
+        if (coll.gameObject.tag == "ground")
+        {
+            isOnGround = true;
+        }
+
+        /*GameObject collidedWith = coll.transform.gameObject;
 
         if (collidedWith.tag == "Box")
         {
@@ -31,6 +49,19 @@ public class Enemy : MonoBehaviour {
 
             // does not work if collider needs to be swapped too
             GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+        }*/
+    }
+
+    void OnCollisionStay2D(Collision coll)
+    {
+        if (coll.gameObject.tag == "ground")
+        {
+            isOnGround = true;
         }
+    }
+
+    void OnCollisionExit2D()
+    {
+        isOnGround = false;
     }
 }
