@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Shooter : MonoBehaviour {
 
-    public float speed;
+    public float speed = 7f;
     public Transform player;
     public GameObject bullet;
     public bool isOnGround = false;
@@ -13,7 +13,6 @@ public class Shooter : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        speed = 1.5f;
         GetComponent<SpriteRenderer>().flipX = false;
 
         spawnTime = 0f;
@@ -24,11 +23,7 @@ public class Shooter : MonoBehaviour {
     {
         if (!isOnGround)
         {
-            Physics2D.gravity = new Vector2(0, -10f);
-        }
-        else
-        {
-            //transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime); // drop then follows
+            Physics.gravity = new Vector3(0, -10f, 0);
         }
 
         if (transform.position.x < player.position.x)
@@ -83,26 +78,7 @@ public class Shooter : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter2D(Collision2D coll)
-    {
-        if (coll.gameObject.tag == "ground")
-        {
-            isOnGround = true;
-        }
-
-        /*GameObject collidedWith = coll.transform.gameObject;
-
-        if (collidedWith.tag == "Box")
-        {
-            Debug.Log("hit");
-            speed = -speed;
-
-            // does not work if collider needs to be swapped too
-            GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
-        }*/
-    }
-
-    void OnCollisionStay2D(Collision coll)
+    void OnCollisionEnter(Collision coll)
     {
         if (coll.gameObject.tag == "ground")
         {
@@ -110,7 +86,15 @@ public class Shooter : MonoBehaviour {
         }
     }
 
-    void OnCollisionExit2D()
+    void OnCollisionStay(Collision coll)
+    {
+        if (coll.gameObject.tag == "ground")
+        {
+            isOnGround = true;
+        }
+    }
+
+    void OnCollisionExit()
     {
         isOnGround = false;
     }
