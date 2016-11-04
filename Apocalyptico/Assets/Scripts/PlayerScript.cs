@@ -6,6 +6,8 @@ public class PlayerScript : MonoBehaviour{
     //remove // to activate it 
     //public Animator anim;
     public GameObject player;
+	public float bulletSpeed = 100;
+	public GameObject bullet; //get the bullet object
     public bool invincible = false;
     public bool invisible = false;
     public bool isDead = false;
@@ -18,6 +20,8 @@ public class PlayerScript : MonoBehaviour{
     public float JumpSpeed;
     public float JumpDamping = 0.1f;
     public bool isOnGround = false;
+	//private Transform tr;
+	//public float height;
 
     //all variables used to check for physics with collider
     int layerMask;
@@ -33,6 +37,14 @@ public class PlayerScript : MonoBehaviour{
     float maxSpeed = 0.0f;
     float maxfall = 0.0f;
 
+
+	//for animation
+	Animator anim;
+	public bool facingRight = true;
+
+	public bool jump = false;
+	//public Animation attackAnimation;
+	//Vector3 someScale;
     //creates a dictionary that stores float values inside the key "string"
     //public Dictionary<string, int[]> statTable;
 
@@ -57,15 +69,14 @@ public class PlayerScript : MonoBehaviour{
         //x_offset = GetComponent<BoxCollider2D>().offset.x;
         //y_offset = GetComponent<BoxCollider2D>().offset.y;
         //boxcol = player.GetComponent<BoxCollider2D>();
+		anim = GetComponent<Animator>();
     }
 
     void start()
     {
-        layerMask = LayerMask.NameToLayer("normalCollisions");
-        //these sets the animator 
-        //anim = GetComponent<Animator>();
-        //rbody = GetComponent<Animator>();
-        //facedirection = "right";
+
+		layerMask = LayerMask.NameToLayer("Player");
+
     }
 
     void Update(){
@@ -85,13 +96,11 @@ public class PlayerScript : MonoBehaviour{
 
     //fix movement to refresh 1 per frame
     void FixedUpdate()
-    {
-        //box = new Rect(GetComponent<Collider2D>().bounds.min.x, GetComponent<Collider2D>().bounds.min.y, GetComponent<Collider2D>().bounds.size.x, GetComponent<Collider2D>().bounds.size.y);
+	{
+		
         box = new Rect(GetComponent<Collider>().bounds.min.x, GetComponent<Collider>().bounds.min.y, GetComponent<Collider>().bounds.size.x, GetComponent<Collider>().bounds.size.y);
-        //check for center and slope
 
         //Gravity 
-
         //used to predict location when we check for ground
         if (!grounded)
             velocity = new Vector2(velocity.x, Mathf.Max(velocity.y - gravity, -maxfall));
@@ -138,7 +147,6 @@ public class PlayerScript : MonoBehaviour{
 
         //horizontal movement check
         float horizontalAxis = Input.GetAxisRaw("Horizontal");
-
         float newVelocityX = velocity.x;
         if (horizontalAxis != 0)
         {
@@ -182,57 +190,101 @@ public class PlayerScript : MonoBehaviour{
         //movement and action
         if (Input.GetKey(KeyCode.RightArrow))
         {
+			anim.SetBool("Idle", false);
             Debug.Log("going right");
-            //anim.SetBool("right", true);
-            //anim.SetBool("left", false);
-            if (isOnGround)
-            {
-                transform.Translate(Vector2.right * Speed/2 * Time.deltaTime);
-            }
-            else
-            {
-                transform.Translate(Vector2.right * Speed/3 * Time.deltaTime);
-            }
+			facingRight = true;
+				if (isOnGround)
+            	{
+                	transform.Translate(Vector2.right * Speed/2 * Time.deltaTime);
+            	}
+            	else
+            	{
+                	transform.Translate(Vector2.right * Speed/3 * Time.deltaTime);
+            	}
+				anim.SetBool("WalkRight", true);
+
             //facedirection = "right";
-            //anim.SetBool("WalkRight", true);
+
+			GetComponent<SpriteRenderer>().flipX = false;
+
+            
         }
-        else
-        {
-            //anim.SetBool("WalkRight", false);
-        }
+		else {
+			anim.SetBool("Idle", true);
+			anim.SetBool("WalkRight", false);
+		}
+
+
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
+			anim.SetBool("Idle", false);
+			facingRight = false;
             Debug.Log("going left");
             //anim.SetBool("right", false);
             //anim.SetBool("left", true);
-            if (isOnGround)
-            {
-                transform.Translate(Vector2.left * Speed/2 * Time.deltaTime);
-            }
-            else
-            {
-                transform.Translate(Vector2.left * Speed/3 * Time.deltaTime);
-            }
-            //facedirection = "left";
-            //anim.SetBool("WalkLeft", true);
-        }
-        else
-        {
-            //anim.SetBool("WalkLeft", false);
-        }
-        if (Input.GetKey(KeyCode.Space) && isOnGround)
-        {
-           
-            Jump();
-            
-        }
 
+            	if (isOnGround)
+            	{
+                	transform.Translate(Vector2.left * Speed/2 * Time.deltaTime);
+            	}
+            	else
+            	{
+                	transform.Translate(Vector2.left * Speed/3 * Time.deltaTime);
+				}
+				anim.SetBool("WalkLeft", true);
+
+            //facedirection = "left";
+
+			GetComponent<SpriteRenderer>().flipX = true;
+
+        }
+		else {
+			anim.SetBool("Idle",true);
+			anim.SetBool("WalkLeft",false);
+		}
+
+		//Attack 
+		if (Input.GetKeyDown(KeyCode.F))
+		{
+			Fire();
+
+		}
+
+
+
+		//jump
+		if ((Input.GetKey(KeyCode.Space) && isOnGround) || (Input.GetKey(KeyCode.Space) && isOnGround && Input.GetKey(KeyCode.RightArrow))
+		 || (Input.GetKey(KeyCode.Space) && isOnGround && Input.GetKey(KeyCode.RightArrow))
+			)
+        { 
+			Vector3 v3 = GetComponent<Rigidbody>().velocity;
+			v3.y = 0;
+			GetComponent<Rigidbody>().velocity = v3;
+			//anim.SetBool("Jumping", true);
+			anim.SetTrigger("Jumping");
+			GetComponent<Rigidbody>().AddForce(new Vector2(0, JumpSpeed), ForceMode.Impulse);
+			if (!isOnGround)
+			{
+				anim.SetBool("Jumping", false);
+			}
+			else if (isOnGround)
+			{
+				anim.SetBool("Idle", true);	
+			}
+        }
+			
+
+
+
+
+		//check ground
         if (!isOnGround)
         {
 
             Physics.gravity = new Vector3(0, -20.0F, 0);
         }
+
         /*
         if (Input.GetKey(KeyCode.DownArrow))
         {
@@ -308,6 +360,41 @@ public class PlayerScript : MonoBehaviour{
         transform.Translate(velocity * Time.deltaTime);
     }
 
+	//press F key to fire weapon
+	void Fire()
+	{
+		//just display animation
+		anim.SetTrigger("Fire");
+		//attackAnimation.Play();
+		//for testing ... instantiate bullet
+		//get player facing direction
+		Vector3 position = GetComponent<Transform>().position;
+		if (facingRight)
+		{
+			position  = position + new Vector3 (2,0,0);
+			//GetComponent<SpriteRenderer>().flipX = false;
+		}
+		else
+		{
+			position = position + new Vector3 (-2,0,0);
+			//GetComponent<SpriteRenderer>().flipX = true;
+		}
+
+		GameObject Clone;
+		Clone = (Instantiate(bullet, position, Quaternion.identity)) as GameObject;
+
+		Debug.Log("Fire");
+		if (facingRight)
+		{
+			Clone.GetComponent<Rigidbody2D>().AddForce(Vector2.right.normalized * bulletSpeed, ForceMode2D.Impulse);
+		}
+		else
+		{
+			Clone.GetComponent<Rigidbody2D>().AddForce(Vector2.left.normalized * bulletSpeed, ForceMode2D.Impulse);
+		}
+	}
+
+
 	void OnCollisionEnter(Collision col) //only checks enter
 	{	
 		if(col.gameObject.tag == "ground"){
@@ -330,16 +417,5 @@ public class PlayerScript : MonoBehaviour{
         Debug.Log("is off ground");
         isOnGround = false;
     }
-
-  
-    void Jump()
-    {
-
-        Vector3 v3 = GetComponent<Rigidbody>().velocity;
-        v3.y = 0;
-        GetComponent<Rigidbody>().velocity = v3;
-        GetComponent<Rigidbody>().AddForce(new Vector2(0, JumpSpeed), ForceMode.Impulse);
-
-
-    }
-}
+		
+}	
