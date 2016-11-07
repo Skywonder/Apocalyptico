@@ -5,13 +5,11 @@ public class Enemy : MonoBehaviour {
     public float speed = 9f;
     public Transform player;
     public bool isOnGround = false;
-    public Transform spawner;  
 
     // Use this for initialization
     void Start () {
         player = GameObject.Find("Player").GetComponent<Transform>();
         GetComponent<SpriteRenderer>().flipX = false;
-        transform.position = spawner.position;
     }
 	
 	// Update is called once per frame

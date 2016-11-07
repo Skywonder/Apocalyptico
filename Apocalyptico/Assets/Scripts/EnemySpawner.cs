@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour {
             spawnTime -= Time.deltaTime;
             if (spawnTime <= 0 )
             {
-                newEnemy = (GameObject)Instantiate(enemy, new Vector2(-3, 2), Quaternion.identity);
+                newEnemy = (GameObject)Instantiate(enemy, transform.position, Quaternion.identity);
                 spawnTime = 4f;
                 maxSpawn -= 1;
             }
