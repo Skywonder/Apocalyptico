@@ -12,14 +12,15 @@ public class PlayerScript : MonoBehaviour{
     public bool invisible = false;
     public bool isDead = false;
     public string statUrl = "Assests/Data Sheets/PlayerStats.csv";
-    private BoxCollider2D boxcol;
-    //private float x_width;
-    //private float y_height;
-    //private float x_offset;
-    //private float y_offset;
+    private BoxCollider boxcol;
+    private float x_width;
+    private float y_height;
+    private float x_offset;
+    private float y_offset;
     public float JumpSpeed;
     public float JumpDamping = 0.1f;
     public bool isOnGround = false;
+    public bool crouching = false;
 	//private Transform tr;
 	//public float height;
 
@@ -68,11 +69,11 @@ public class PlayerScript : MonoBehaviour{
 
         Debug.Log(maxHealth);
         curHealth = maxHealth;
-        //x_width = GetComponent<BoxCollider2D>().size.x;
-        //y_height = GetComponent<BoxCollider2D>().size.y;
-        //x_offset = GetComponent<BoxCollider2D>().offset.x;
-        //y_offset = GetComponent<BoxCollider2D>().offset.y;
-        //boxcol = player.GetComponent<BoxCollider2D>();
+        x_width = GetComponent<BoxCollider>().size.x;
+        y_height = GetComponent<BoxCollider>().size.y;
+        //x_offset = GetComponent<BoxCollider>().offset.x;
+        //y_offset = GetComponent<BoxCollider>().offset.y;
+        boxcol = player.GetComponent<BoxCollider>();
 		anim = GetComponent<Animator>();
     }
 
@@ -192,17 +193,20 @@ public class PlayerScript : MonoBehaviour{
         }
 
         //movement and action
+        //Control Scheme Right arrow
         if (Input.GetKey(KeyCode.RightArrow))
         {
 			anim.SetBool("Idle", false);
             Debug.Log("going right");
 			facingRight = true;
-				if (isOnGround)
+				if (isOnGround && (crouching == false))
             	{
+                Debug.Log("Crouching false");
                 	transform.Translate(Vector2.right * Speed/2 * Time.deltaTime);
             	}
-            	else
+            	else if (!isOnGround)
             	{
+                Debug.Log("Crouching on");
                 	transform.Translate(Vector2.right * Speed/3 * Time.deltaTime);
             	}
 				anim.SetBool("WalkRight", true);
@@ -219,7 +223,7 @@ public class PlayerScript : MonoBehaviour{
 		}
 
 
-
+        //Control Scheme left arrow
         if (Input.GetKey(KeyCode.LeftArrow))
         {
 			anim.SetBool("Idle", false);
@@ -228,11 +232,11 @@ public class PlayerScript : MonoBehaviour{
             //anim.SetBool("right", false);
             //anim.SetBool("left", true);
 
-            	if (isOnGround)
+            	if (isOnGround && (crouching == false))
             	{
                 	transform.Translate(Vector2.left * Speed/2 * Time.deltaTime);
             	}
-            	else
+            	else if (!isOnGround)
             	{
                 	transform.Translate(Vector2.left * Speed/3 * Time.deltaTime);
 				}
@@ -267,22 +271,25 @@ public class PlayerScript : MonoBehaviour{
         //jump
         if (Input.GetKey(KeyCode.Space) && isOnGround)
         {
-            Vector3 v3 = GetComponent<Rigidbody>().velocity;
-            v3.y = 0;
-            GetComponent<Rigidbody>().velocity = v3;
-            anim.SetBool("Jumping", true);
-            Debug.Log("jumping on");
-            //anim.SetTrigger("Jumping");
-            GetComponent<Rigidbody>().AddForce(new Vector2(0, JumpSpeed), ForceMode.Impulse);
-            if (!isOnGround)
+            if (!crouching)
             {
-                anim.SetBool("Jumping", false);
-                Debug.Log("Jumping state");
-            }
-            if (isOnGround)
-            {
-                anim.SetBool("Idle", true);
-                Debug.Log("Idle On");
+                Vector3 v3 = GetComponent<Rigidbody>().velocity;
+                v3.y = 0;
+                GetComponent<Rigidbody>().velocity = v3;
+                anim.SetBool("Jumping", true);
+                Debug.Log("jumping on");
+                //anim.SetTrigger("Jumping");
+                GetComponent<Rigidbody>().AddForce(new Vector2(0, JumpSpeed), ForceMode.Impulse);
+                if (!isOnGround)
+                {
+                    anim.SetBool("Jumping", false);
+                    Debug.Log("Jumping state");
+                }
+                if (isOnGround)
+                {
+                    anim.SetBool("Idle", true);
+                    Debug.Log("Idle On");
+                }
             }
         }
         else
@@ -292,36 +299,32 @@ public class PlayerScript : MonoBehaviour{
         }
 			
 
-		//check ground
+		//check gravity 
         if (!isOnGround)
         {
 
             Physics.gravity = new Vector3(0, -20.0F, 0);
         }
 
-        /*
+        //checking crouching condition
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            //anim.SetBool("up", false);
-            //anim.SetBool("down", true);
-            //instead of transform we change the collider box height 
-            //reduce the collider height by 1/2
-            //anim.SetBool("Dodge", true);
-           
-            //needs tuning
-            boxcol.size = new Vector2(x_width, y_height/2);
-            boxcol.offset = new Vector2(x_offset, y_offset - y_height/2 + 1);
-            
+            if (isOnGround)
+            {
+                crouching = true;
+                anim.SetBool("Crouching", true);
+                boxcol.enabled = false;//close the box collider
+                                       //fix character on x position
+                player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
+            }
         }
         else
         {
-            boxcol.size = new Vector2(x_width, y_height);
-            boxcol.offset = new Vector2(x_offset, y_offset);
-            //anim.SetBool("Dodge", false);
-            //restore the collider box height
-
+            crouching = false;
+            boxcol.enabled = true; //reenable the box collider
+            anim.SetBool("Crouching", false);
+            player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ|RigidbodyConstraints.FreezeRotation;
         }
-        */
     }
   
 
@@ -445,6 +448,7 @@ public class PlayerScript : MonoBehaviour{
 		if(col.gameObject.tag == "ground"){
 			Debug.Log("is on ground");
 			isOnGround = true;
+            anim.SetBool("Ground", true);
 		}
 
     }
@@ -461,6 +465,7 @@ public class PlayerScript : MonoBehaviour{
     {
         Debug.Log("is off ground");
         isOnGround = false;
+        anim.SetBool("Ground", false);
     }
 		
 }	
