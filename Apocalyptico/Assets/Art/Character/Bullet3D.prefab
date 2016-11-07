@@ -9,34 +9,34 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000010463370594}
+  m_RootGameObject: {fileID: 1000012810632974}
   m_IsPrefabParent: 1
---- !u!1 &1000010463370594
+--- !u!1 &1000012810632974
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000011178338890}
-  - 212: {fileID: 212000011702981502}
-  - 114: {fileID: 114000013313943444}
-  - 50: {fileID: 50000011418182800}
-  - 58: {fileID: 58000011624529912}
-  - 114: {fileID: 114000013407997568}
+  - 4: {fileID: 4000012423084762}
+  - 212: {fileID: 212000013827163226}
+  - 114: {fileID: 114000010280282122}
+  - 114: {fileID: 114000013222083884}
+  - 135: {fileID: 135000010167609154}
+  - 54: {fileID: 54000011270911246}
   m_Layer: 0
-  m_Name: BULLET
-  m_TagString: bullet
+  m_Name: Bullet3D
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4000011178338890
+--- !u!4 &4000012423084762
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010463370594}
+  m_GameObject: {fileID: 1000012810632974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.7, y: 0.02, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
@@ -44,55 +44,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!50 &50000011418182800
-Rigidbody2D:
-  serializedVersion: 2
+--- !u!54 &54000011270911246
+Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010463370594}
-  m_UseAutoMass: 1
+  m_GameObject: {fileID: 1000012810632974}
+  serializedVersion: 2
   m_Mass: 1
-  m_LinearDrag: 0
+  m_Drag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58000011624529912
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010463370594}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.075
---- !u!114 &114000013313943444
+  m_CollisionDetection: 0
+--- !u!114 &114000010280282122
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010463370594}
+  m_GameObject: {fileID: 1000012810632974}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0b92aac866154f208f367c974e91177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 100
---- !u!114 &114000013407997568
+--- !u!114 &114000013222083884
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010463370594}
+  m_GameObject: {fileID: 1000012810632974}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a4cda2f2c36732418dcb7977600e3ef, type: 3}
@@ -100,12 +84,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   countdown: 0.5
---- !u!212 &212000011702981502
+--- !u!135 &135000010167609154
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012810632974}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!212 &212000013827163226
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010463370594}
+  m_GameObject: {fileID: 1000012810632974}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

@@ -37,20 +37,24 @@ public class PlayerScript : MonoBehaviour{
     float maxSpeed = 0.0f;
     float maxfall = 0.0f;
 
-
-	//for animation
-	Animator anim;
+    //set this to check instantiation
+    private bool isCreated;
+    private float startTime;
+    //for animation
+    Animator anim;
 	public bool facingRight = true;
-
 	public bool jump = false;
-	//public Animation attackAnimation;
-	//Vector3 someScale;
-    //creates a dictionary that stores float values inside the key "string"
-    //public Dictionary<string, int[]> statTable;
-
     public float Speed = 1.5f; //for movement
 
+    //for other variables
     private int curHealth; //<--the only value changing
+
+    //check fire....
+    private float lastFire;
+    private float fireRate;
+
+    //check fire timer
+    private float timer;
 
     public int Level{//Level == powerup <-- if we ever decide to have it
         get { return 1; }
@@ -80,7 +84,7 @@ public class PlayerScript : MonoBehaviour{
     }
 
     void Update(){
-
+        Debug.Log(getMaxHealth());
         AdjustCurrentHealth(0);
 
     }
@@ -244,39 +248,49 @@ public class PlayerScript : MonoBehaviour{
 			anim.SetBool("WalkLeft",false);
 		}
 
-		//Attack 
-		if (Input.GetKeyDown(KeyCode.F))
-		{
-			Fire();
 
-		}
+        if (Input.GetKey(KeyCode.F))
+        {
+            Debug.Log("fire version 1");
+            //Debug.Log("fire version 2");
+            Fire();
+            //Fire2();
+        }
+        else//if nothing is done reset created
+        {
+            anim.SetBool("Fire", false);
+            isCreated = false;
+        }
+        
 
 
-
-		//jump
-		if ((Input.GetKey(KeyCode.Space) && isOnGround) || (Input.GetKey(KeyCode.Space) && isOnGround && Input.GetKey(KeyCode.RightArrow))
-		 || (Input.GetKey(KeyCode.Space) && isOnGround && Input.GetKey(KeyCode.RightArrow))
-			)
-        { 
-			Vector3 v3 = GetComponent<Rigidbody>().velocity;
-			v3.y = 0;
-			GetComponent<Rigidbody>().velocity = v3;
-			//anim.SetBool("Jumping", true);
-			anim.SetTrigger("Jumping");
-			GetComponent<Rigidbody>().AddForce(new Vector2(0, JumpSpeed), ForceMode.Impulse);
-			if (!isOnGround)
-			{
-				anim.SetBool("Jumping", false);
-			}
-			else if (isOnGround)
-			{
-				anim.SetBool("Idle", true);	
-			}
+        //jump
+        if (Input.GetKey(KeyCode.Space) && isOnGround)
+        {
+            Vector3 v3 = GetComponent<Rigidbody>().velocity;
+            v3.y = 0;
+            GetComponent<Rigidbody>().velocity = v3;
+            anim.SetBool("Jumping", true);
+            Debug.Log("jumping on");
+            //anim.SetTrigger("Jumping");
+            GetComponent<Rigidbody>().AddForce(new Vector2(0, JumpSpeed), ForceMode.Impulse);
+            if (!isOnGround)
+            {
+                anim.SetBool("Jumping", false);
+                Debug.Log("Jumping state");
+            }
+            if (isOnGround)
+            {
+                anim.SetBool("Idle", true);
+                Debug.Log("Idle On");
+            }
+        }
+        else
+        {
+            anim.SetBool("Jumping", false);
+            Debug.Log("jumping off");
         }
 			
-
-
-
 
 		//check ground
         if (!isOnGround)
@@ -361,41 +375,72 @@ public class PlayerScript : MonoBehaviour{
     }
 
 	//press F key to fire weapon
+    // version 1...can only single fire
 	void Fire()
 	{
-		//just display animation
-		anim.SetTrigger("Fire");
-		//attackAnimation.Play();
-		//for testing ... instantiate bullet
-		//get player facing direction
-		Vector3 position = GetComponent<Transform>().position;
-		if (facingRight)
-		{
-			position  = position + new Vector3 (2,0,0);
-			//GetComponent<SpriteRenderer>().flipX = false;
-		}
-		else
-		{
-			position = position + new Vector3 (-2,0,0);
-			//GetComponent<SpriteRenderer>().flipX = true;
-		}
-
-		GameObject Clone;
-		Clone = (Instantiate(bullet, position, Quaternion.identity)) as GameObject;
-
-		Debug.Log("Fire");
-		if (facingRight)
-		{
-			Clone.GetComponent<Rigidbody2D>().AddForce(Vector2.right.normalized * bulletSpeed, ForceMode2D.Impulse);
-		}
-		else
-		{
-			Clone.GetComponent<Rigidbody2D>().AddForce(Vector2.left.normalized * bulletSpeed, ForceMode2D.Impulse);
-		}
+        Debug.Log("Fire1");
+        
+        if (!isCreated)
+        {
+            anim.SetBool("Fire", true);
+            InstantiateBullet();
+            isCreated = true;
+        }
 	}
 
+    //version 2...can hold fire
+    void Fire2()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            timer += 1;
+        }
+        if (timer > 0)
+        {
+            Debug.Log("Fire2");
+            anim.SetBool("Fire", true);
+            InstantiateBullet();
+        }
+    }
 
-	void OnCollisionEnter(Collision col) //only checks enter
+    //Function just to get face direction
+    Vector3 getFacePosition(){
+        Vector3 position = GetComponent<Transform>().position;//gets character position
+        if (facingRight)
+        {
+            position = position + new Vector3((float)0.5, (float)0.25, 0);
+            //GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else
+        {
+            position = position + new Vector3(-(float)0.5,(float)0.25, 0);
+            //GetComponent<SpriteRenderer>().flipX = true;
+        }
+        return position;
+    }
+    //Allow the instantiation of bullet...or whatever comes out
+    void InstantiateBullet()
+    {
+        GameObject Clone;
+        Vector3 position = getFacePosition();
+        Clone = (Instantiate(bullet, position, Quaternion.identity)) as GameObject;
+        Debug.Log("Fire");
+        if (facingRight)
+        {
+            Clone.GetComponent<Rigidbody2D>().AddForce(Vector2.right.normalized * bulletSpeed, ForceMode2D.Impulse);
+            
+        }
+        else
+        {
+            Clone.GetComponent<Rigidbody2D>().AddForce(Vector2.left.normalized * bulletSpeed, ForceMode2D.Impulse);
+
+        }
+    }
+
+
+
+
+    void OnCollisionEnter(Collision col) //only checks enter
 	{	
 		if(col.gameObject.tag == "ground"){
 			Debug.Log("is on ground");
