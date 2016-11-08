@@ -13,14 +13,14 @@ public class PlayerGUI : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         maxhp = (int)player.GetComponent<PlayerScript>().getMaxHealth();
-        hithp = (int)hitchecker.GetComponent<checkHitScript>().hitpoint;
+        
         text = GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-  
+		hithp = (int)hitchecker.GetComponent<checkHitScript>().hitpoint;
         text.text = "Player Health: " + hithp;
 	}
 }

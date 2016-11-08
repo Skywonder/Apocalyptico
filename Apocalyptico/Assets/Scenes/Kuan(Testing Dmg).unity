@@ -143,6 +143,10 @@ Prefab:
       propertyPath: m_Name
       value: Stage
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012948675314, guid: 95f532e8c231da5408a9c402dbc1ca59, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95f532e8c231da5408a9c402dbc1ca59, type: 2}
   m_IsPrefabParent: 0
@@ -368,6 +372,10 @@ Prefab:
         type: 2}
       propertyPath: m_Radius
       value: 0.1243763
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012782370978, guid: b8f15a25d7288ef45bf67e97c5a4b83d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b8f15a25d7288ef45bf67e97c5a4b83d, type: 2}
