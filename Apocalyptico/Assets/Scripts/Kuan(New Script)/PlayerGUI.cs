@@ -4,16 +4,16 @@ using UnityEngine.UI;
 
 public class PlayerGUI : MonoBehaviour {
 
+    public GameObject hitchecker;
     public GameObject player;
-    private int playerhp;
-    private int maxhp;
+    private int hithp; //temp hp for calculation
+    private int maxhp;//set max hp for status max
     Text text;
 
 	// Use this for initialization
 	void Awake () {
         maxhp = (int)player.GetComponent<PlayerScript>().getMaxHealth();
-        playerhp = (int)player.GetComponent<PlayerScript>().getCurHealth();
-        playerhp = maxhp;
+        hithp = (int)hitchecker.GetComponent<checkHitScript>().hitpoint;
         text = GetComponent<Text>();
 	}
 	
@@ -21,6 +21,6 @@ public class PlayerGUI : MonoBehaviour {
 	void Update () {
 
   
-        text.text = "Player Health: " + playerhp;
+        text.text = "Player Health: " + hithp;
 	}
 }

@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class checkHitScript : MonoBehaviour {
-
+    //This script works for every single game object including the player!!!!
+    //Can modify depending on need...
+    //place the prefab attached by this script to any gameobject as child, then it can take dmg from 2d object with certain tag name
 	// Use this for initialization
 	public int hitpoint = 20;
 

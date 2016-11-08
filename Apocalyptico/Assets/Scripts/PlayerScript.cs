@@ -366,6 +366,7 @@ public class PlayerScript : MonoBehaviour{
     public void Death()
     {
         isDead = true;
+        Debug.Log("Player is DEAD!!!");
         //anim.SetTrigger("Die");
         //display death animation and stop all action (movement, ability)
     }
@@ -411,12 +412,12 @@ public class PlayerScript : MonoBehaviour{
         Vector3 position = GetComponent<Transform>().position;//gets character position
         if (facingRight)
         {
-            position = position + new Vector3((float)0.5, (float)0.25, 0);
+            position = position + new Vector3((float)1.25, (float)0.25, 0);
             //GetComponent<SpriteRenderer>().flipX = false;
         }
         else
         {
-            position = position + new Vector3(-(float)0.5,(float)0.25, 0);
+            position = position + new Vector3(-(float)1.25,(float)0.25, 0);
             //GetComponent<SpriteRenderer>().flipX = true;
         }
         return position;
