@@ -377,6 +377,12 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010401725428, guid: b8f15a25d7288ef45bf67e97c5a4b83d,
+        type: 2}
+      propertyPath: flame
+      value: 
+      objectReference: {fileID: 1000013087741142, guid: eb2eb7669841d344f92c3e7d04e0648c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b8f15a25d7288ef45bf67e97c5a4b83d, type: 2}
   m_IsPrefabParent: 0

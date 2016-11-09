@@ -7,7 +7,9 @@ public class PlayerScript : MonoBehaviour{
     //public Animator anim;
     public GameObject player;
 	public float bulletSpeed = 100;
-	public GameObject bullet; //get the bullet object
+    public float flameSpeed = 50;
+    public GameObject bullet; //get the bullet object
+    public GameObject flame;  //get the flame object
     public bool invincible = false;
     public bool invisible = false;
     public bool isDead = false;
@@ -53,6 +55,8 @@ public class PlayerScript : MonoBehaviour{
     //check fire....
     private float lastFire;
     private float fireRate;
+    //weapon toggle key
+    public string weaponToggleKey;
 
     //check fire timer
     private float timer;
@@ -75,6 +79,9 @@ public class PlayerScript : MonoBehaviour{
         //y_offset = GetComponent<BoxCollider>().offset.y;
         boxcol = player.GetComponent<BoxCollider>();
 		anim = GetComponent<Animator>();
+
+        //set default weapon to to fire3 mode
+        weaponToggleKey = "Fire3";
     }
 
     void start()
@@ -87,7 +94,7 @@ public class PlayerScript : MonoBehaviour{
     void Update(){
         Debug.Log(getMaxHealth());
         AdjustCurrentHealth(0);
-
+        WeaponToggle();
     }
 
     public void AdjustCurrentHealth(int adj)
@@ -257,8 +264,18 @@ public class PlayerScript : MonoBehaviour{
         {
             Debug.Log("fire version 1");
             //Debug.Log("fire version 2");
-            Fire();
+            //Fire();
             //Fire2();
+
+            //call method that controls the current selected weapon
+            WeaponController();
+        }
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            //cancel the repeating invoking of bullets AND method that calls it
+            CancelInvoke("WeaponController");
+            CancelInvoke("InstantiateBullet");
+            CancelInvoke("InstantiateFlame");
         }
         else//if nothing is done reset created
         {
@@ -406,7 +423,74 @@ public class PlayerScript : MonoBehaviour{
             InstantiateBullet();
         }
     }
+    //default machine gun to fire at approx 400RPM
+    void Fire3()
+    {
+        Debug.Log("Fire3");
+        anim.SetBool("Fire", true);
+        InvokeRepeating("InstantiateBullet", 0.2f, 0.15f);
+    }
 
+    //Flamethrower weapon, needs a set range and parabolic motion
+    void Fire4()
+    {
+        Debug.Log("Fire4");
+        anim.SetBool("Fire", true);
+        InvokeRepeating("InstantiateFlame", 0.2f, 0.75f);
+    }
+
+    void Fire5()
+    {
+        Debug.Log("Fire5");
+        anim.SetBool("Fire", true);
+        InvokeRepeating("InstantiateBullet", 0.05f, 0.95f);
+    }
+
+    void WeaponController()
+    {
+        if (weaponToggleKey == "Fire3")
+        {
+            if (!IsInvoking("InstantiateBullet"))
+            {
+                Fire3();
+            }
+        }
+        else if (weaponToggleKey == "Fire4")
+        {
+            if (!IsInvoking("InstantiateBullet"))
+            {
+                Fire4();
+            }
+        }
+        else if (weaponToggleKey == "Fire5")
+        {
+            if (!IsInvoking("InstantiateBullet"))
+            {
+                Fire5();
+            }
+        }
+    }
+
+
+    void WeaponToggle()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Debug.Log("Weapon Switched to 1");
+            weaponToggleKey = "Fire3";
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            Debug.Log("Weapon Switched to 2");
+            weaponToggleKey = "Fire4";
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log("Weapon Switched to 3");
+            weaponToggleKey = "Fire5";
+        }
+    }
     //Function just to get face direction
     Vector3 getFacePosition(){
         Vector3 position = GetComponent<Transform>().position;//gets character position
@@ -441,6 +525,23 @@ public class PlayerScript : MonoBehaviour{
         }
     }
 
+    //Allow the instantiation of "Flames"
+
+    void InstantiateFlame()
+    {
+        GameObject CloneFlame;
+        Vector3 position = getFacePosition();
+        CloneFlame = (Instantiate(flame, position, Quaternion.identity)) as GameObject;
+        Debug.Log("Firing Flame");
+        if (facingRight)
+        {
+            CloneFlame.GetComponent<Rigidbody2D>().AddForce(Vector2.one.normalized * flameSpeed, ForceMode2D.Impulse);
+        }
+        else
+        {
+            CloneFlame.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 1) * flameSpeed, ForceMode2D.Impulse);
+        }
+    }
 
 
 
