@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
         transform.position = position;
     }
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnCollisionEnter(Collision coll)
     {
         Destroy(gameObject);
     }

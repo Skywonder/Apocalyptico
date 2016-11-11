@@ -8,11 +8,12 @@ public class Shooter : MonoBehaviour {
     public GameObject bullet;
     public bool isOnGround = false;
 
-    private float spawnTime;
+    public float spawnTime;
 
     // Use this for initialization
     void Start()
     {
+        player = GameObject.Find("Player").transform;
         GetComponent<SpriteRenderer>().flipX = false;
 
         spawnTime = 0f;
@@ -54,11 +55,11 @@ public class Shooter : MonoBehaviour {
 
         if (GetComponent<SpriteRenderer>().flipX == false)
         {
-            offset = new Vector2(transform.position.x - 1, transform.position.y);
+            offset = new Vector2(transform.position.x - 1.5f, transform.position.y);
         }
         else
         {
-            offset = new Vector2(transform.position.x + 1, transform.position.y);
+            offset = new Vector2(transform.position.x + 1.5f, transform.position.y);
         }
 
         if (spawnTime <= 0)

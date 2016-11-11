@@ -228,6 +228,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!1001 &1136534069
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000011556358684, guid: 131722e84cf0a184a8737ef519576d69, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011556358684, guid: 131722e84cf0a184a8737ef519576d69, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011556358684, guid: 131722e84cf0a184a8737ef519576d69, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011556358684, guid: 131722e84cf0a184a8737ef519576d69, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011556358684, guid: 131722e84cf0a184a8737ef519576d69, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011556358684, guid: 131722e84cf0a184a8737ef519576d69, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011556358684, guid: 131722e84cf0a184a8737ef519576d69, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011556358684, guid: 131722e84cf0a184a8737ef519576d69, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012026512072, guid: 131722e84cf0a184a8737ef519576d69, type: 2}
+      propertyPath: m_Name
+      value: Spawner (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010993476982, guid: 131722e84cf0a184a8737ef519576d69,
+        type: 2}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 1000010957941476, guid: ee8e29ec7547ade4aba412be9be1a5d4,
+        type: 2}
+    - target: {fileID: 114000010993476982, guid: 131722e84cf0a184a8737ef519576d69,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1997989782}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 131722e84cf0a184a8737ef519576d69, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1214711765
 Prefab:
   m_ObjectHideFlags: 0

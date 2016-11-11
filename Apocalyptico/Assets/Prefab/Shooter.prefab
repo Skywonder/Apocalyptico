@@ -81,10 +81,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1fa752cae8bcfa4bb8f74a787229ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 3
   player: {fileID: 0}
   bullet: {fileID: 1000011279711328, guid: 63ddc9cf05d0d444da02b570375e082e, type: 2}
   isOnGround: 0
+  spawnTime: 3
 --- !u!212 &212000014243650610
 SpriteRenderer:
   m_ObjectHideFlags: 1
