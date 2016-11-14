@@ -4,17 +4,16 @@ using System.Collections;
 public class Shooter : MonoBehaviour {
 
     public float speed = 7f;
-    public Transform player;
     public GameObject bullet;
     public bool isOnGround = false;
-
     public float spawnTime;
+
+    private Transform player;
 
     // Use this for initialization
     void Start()
     {
         player = GameObject.Find("Player").transform;
-        GetComponent<SpriteRenderer>().flipX = false;
 
         spawnTime = 0f;
     }

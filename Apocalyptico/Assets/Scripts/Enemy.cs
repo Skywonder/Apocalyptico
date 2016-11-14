@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
     public float speed = 9f;
-    public Transform player;
     public bool isOnGround = false;
+
+    private Transform player;
 
     // Use this for initialization
     void Start () {
         player = GameObject.Find("Player").GetComponent<Transform>();
-        GetComponent<SpriteRenderer>().flipX = false;
     }
 	
 	// Update is called once per frame
@@ -43,6 +43,12 @@ public class Enemy : MonoBehaviour {
         if (coll.gameObject.tag == "ground")
         {
             isOnGround = true;
+        }
+
+        if (coll.gameObject.tag == "player")
+        {
+            //explode animation
+            //do damage
         }
     }
 
