@@ -6,6 +6,8 @@ TagManager:
   tags:
   - ground
   - Box
+  - bullet
+  - flame
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - 
   - normalCollisions
   - Enemy
-  - 
+  - background
   - 
   - 
   - 
@@ -40,6 +42,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 4282665817
+    locked: 0
+  - name: backGrass
+    uniqueID: 867659339
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: player
+    uniqueID: 305852415
+    locked: 0
+  - name: frontTrees
+    uniqueID: 4003957613
     locked: 0
