@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemySpawner : MonoBehaviour {
+public class EnemyInfSpawner : MonoBehaviour {
     public GameObject enemy;
-    public float spawnTime = 1.0f;
-    public int maxSpawn = 3;
+    public float spawnTime = 2.5f;
+    public Sprite norm;
+    public Sprite spawn;
 
     private Transform player;
     private GameObject newEnemy;
@@ -16,15 +17,22 @@ public class EnemySpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Vector2.Distance(transform.position, player.position) <= 15 && maxSpawn != 0)
+        if (Vector2.Distance(transform.position, player.position) <= 15)
         {
             spawnTime -= Time.deltaTime;
             if (spawnTime <= 0)
             {
+                GetComponent<SpriteRenderer>().sprite = spawn;
                 newEnemy = (GameObject)Instantiate(enemy, transform.position, Quaternion.identity);
-                spawnTime = 1f;
-                maxSpawn -= 1;
+                spawnTime = 2.5f;
+                StartCoroutine(TimeDelay());
             }
         }
-	}
+    }
+
+    IEnumerator TimeDelay()
+    {
+        yield return new WaitForSeconds(0.3f);
+        GetComponent<SpriteRenderer>().sprite = norm;
+    }
 }

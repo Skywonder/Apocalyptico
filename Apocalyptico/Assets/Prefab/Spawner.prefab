@@ -52,10 +52,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7bdc80505b3a7418c4d737b194d18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1000012256426538, guid: 36e332990af7c4646ba0c38d4f9a9bbc, type: 2}
-  player: {fileID: 4000010622255918, guid: 5110dc1816bcb944e9eb10f5b8c39ba9, type: 2}
-  spawnTime: 4
-  maxSpawn: 5
+  enemy: {fileID: 1000010822402804, guid: 36e332990af7c4646ba0c38d4f9a9bbc, type: 2}
+  player: {fileID: 0}
+  spawnTime: 1
+  maxSpawn: 3
 --- !u!212 &212000013455197256
 SpriteRenderer:
   m_ObjectHideFlags: 1
