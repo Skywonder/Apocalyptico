@@ -59,7 +59,7 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &58000014101152380
 CircleCollider2D:
@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4cda2f2c36732418dcb7977600e3ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  countdown: 0.5
+  time: 0.5
+  countdown: 1
 --- !u!212 &212000010336177814
 SpriteRenderer:
   m_ObjectHideFlags: 1

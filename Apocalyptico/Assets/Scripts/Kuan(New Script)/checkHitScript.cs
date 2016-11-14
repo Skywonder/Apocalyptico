@@ -24,6 +24,12 @@ public class checkHitScript : MonoBehaviour {
             Destroy(collision.gameObject);
             takehit();
         }
+        if (collision.gameObject.tag == "flame")
+        {
+            Debug.Log("Destroy object with flame");
+            Destroy(collision.gameObject);
+            takehit();
+        }
 
     }
 

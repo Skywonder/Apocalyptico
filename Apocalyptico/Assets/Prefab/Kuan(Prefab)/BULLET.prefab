@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4cda2f2c36732418dcb7977600e3ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
-  countdown: 0.5
+  time: 0.5
+  countdown: 1
 --- !u!212 &212000011702981502
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -5,7 +5,7 @@ public class AmmoScript : MonoBehaviour {
 
     // Use this for initialization
     public float time;
-    public float countdown = 2; 
+    public float countdown = 10; 
 
     //mainly checking if the bullet hits anything or not...
     //if hit has tag enemy then deal damage, else destroy itself after certain time
