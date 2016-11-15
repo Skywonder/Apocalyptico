@@ -301,9 +301,9 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
+    width: 2
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.5
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -386,6 +386,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012603007562, guid: b8f15a25d7288ef45bf67e97c5a4b83d,
+        type: 2}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1000010616678968, guid: d176368d8bc504252b101a396cab9498,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b8f15a25d7288ef45bf67e97c5a4b83d, type: 2}
   m_IsPrefabParent: 0

@@ -57,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012782370978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.6500034, y: -1.0074633, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -70,7 +70,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011470419410}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -166,7 +166,7 @@ MonoBehaviour:
   player: {fileID: 1000012782370978}
   bulletSpeed: 100
   flameSpeed: 50
-  bullet: {fileID: 1000010463370594, guid: aae3fa66462ea429e96fba1aaea023a6, type: 2}
+  bullet: {fileID: 1000010616678968, guid: d176368d8bc504252b101a396cab9498, type: 2}
   flame: {fileID: 1000013087741142, guid: eb2eb7669841d344f92c3e7d04e0648c, type: 2}
   invincible: 0
   invisible: 0
@@ -174,12 +174,12 @@ MonoBehaviour:
   statUrl: Assests/Data Sheets/PlayerStats.csv
   JumpSpeed: 200
   JumpDamping: 0.5
-  isOnGround: 0
+  isOnGround: 1
   crouching: 0
-  facingRight: 1
+  facingRight: 0
   jump: 0
   Speed: 15
-  weaponToggleKey: 
+  weaponToggleKey: Fire2
 --- !u!114 &114000013580435396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -233,7 +233,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300034, guid: 4607b18bb717549c783aab2d11a68475, type: 3}
+  m_Sprite: {fileID: 21300038, guid: 4607b18bb717549c783aab2d11a68475, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0

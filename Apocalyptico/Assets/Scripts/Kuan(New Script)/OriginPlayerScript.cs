@@ -407,6 +407,7 @@ public class OriginPlayerScript : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
+			anim.SetBool("Fire", false);
             timer += 1;
         }
         if (timer > 0)
@@ -520,13 +521,16 @@ public class OriginPlayerScript : MonoBehaviour {
         Vector3 position = getFacePosition();
         Clone = (Instantiate(bullet, position, Quaternion.identity)) as GameObject;
         Debug.Log("Fire");
+
         if (facingRight)
         {
-            Clone.GetComponent<Rigidbody2D>().AddForce(Vector2.right.normalized * bulletSpeed, ForceMode2D.Impulse);
+			Clone.GetComponent<SpriteRenderer>().flipX = true;           
+			Clone.GetComponent<Rigidbody2D>().AddForce(Vector2.right.normalized * bulletSpeed, ForceMode2D.Impulse);
 
         }
         else
         {
+			Clone.GetComponent<SpriteRenderer>().flipX = false;
             Clone.GetComponent<Rigidbody2D>().AddForce(Vector2.left.normalized * bulletSpeed, ForceMode2D.Impulse);
 
         }
@@ -556,10 +560,12 @@ public class OriginPlayerScript : MonoBehaviour {
         Debug.Log("Firing Flame");
         if (facingRight)
         {
+			CloneFlame.GetComponent<SpriteRenderer>().flipX = true;
 			CloneFlame.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,1) * flameSpeed, ForceMode2D.Impulse);
         }
         else
         {
+			CloneFlame.GetComponent<SpriteRenderer>().flipX = false;
 			CloneFlame.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 1) * flameSpeed, ForceMode2D.Impulse);
         }
     }
