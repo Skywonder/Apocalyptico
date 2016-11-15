@@ -67,6 +67,8 @@ public class Enemy : MonoBehaviour {
 
     IEnumerator Explode()
     {
+        Physics.IgnoreCollision(player.GetComponent<BoxCollider>(), GetComponent<BoxCollider>());
+        Physics.IgnoreCollision(player.GetComponent<SphereCollider>(), GetComponent<BoxCollider>());
         anim.SetBool("Hit", true);
         yield return new WaitForSeconds(0.75f);
         Destroy(gameObject);

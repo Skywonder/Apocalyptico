@@ -12,14 +12,14 @@ public class Bullet : MonoBehaviour
 
         if (left)
         {
-            direction = new Vector2(-1.0f, 4.0f);
+            direction = new Vector2(-1.0f, 1.0f);
         }
         else
         {
-            direction = new Vector2(1.0f, 4.0f);
+            direction = new Vector2(1.0f, 1.0f);
         }
 
-        this.GetComponent<Rigidbody>().AddForce(direction * 225f);
+        this.GetComponent<Rigidbody>().AddForce(direction * 500f);
     }
 
     // Update is called once per frame
