@@ -9,11 +9,13 @@ public class Shooter : MonoBehaviour {
     public float spawnTime;
 
     private Transform player;
+    Animator anim;
 
     // Use this for initialization
     void Start()
     {
         player = GameObject.Find("Player").transform;
+        anim = GetComponent<Animator>();
 
         spawnTime = 0f;
     }
@@ -35,12 +37,16 @@ public class Shooter : MonoBehaviour {
             GetComponent<SpriteRenderer>().flipX = false;
         }
 
-        if (Vector2.Distance(transform.position, player.position) > 5f)
+        if (Vector2.Distance(transform.position, player.position) > 10f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime); // strafes towards
+            anim.SetBool("Walk", true);
+            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        } else
+        {
+            anim.SetBool("Walk", false);
         }
 
-        if (Vector2.Distance(transform.position, player.position) <= 5f)
+        if (Vector2.Distance(transform.position, player.position) <= 10f)
         {
             Shoot();
         }
@@ -54,16 +60,15 @@ public class Shooter : MonoBehaviour {
 
         if (GetComponent<SpriteRenderer>().flipX == false)
         {
-            offset = new Vector2(transform.position.x - 1.5f, transform.position.y);
+            offset = new Vector2(transform.position.x - 1.5f, transform.position.y + 0.5f);
         }
         else
         {
-            offset = new Vector2(transform.position.x + 1.5f, transform.position.y);
+            offset = new Vector2(transform.position.x + 1.5f, transform.position.y + 0.5f);
         }
 
         if (spawnTime <= 0)
         {
-            Debug.Log("shot");
             GameObject newBullet = (GameObject)Instantiate(bullet, offset, Quaternion.identity);
             if (GetComponent<SpriteRenderer>().flipX == false)
             {
