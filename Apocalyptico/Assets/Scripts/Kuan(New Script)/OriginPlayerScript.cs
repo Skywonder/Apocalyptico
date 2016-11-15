@@ -310,42 +310,27 @@ public class OriginPlayerScript : MonoBehaviour {
 
 
         //jump
-        if (Input.GetKey(KeyCode.Space) && isOnGround)
+        if (Input.GetKey(KeyCode.Space) )
         {
-            if (!crouching)
-            {
+			if (!crouching && isOnGround)
+			{	
+				anim.SetBool("Jumping", true);
                 Vector3 v3 = GetComponent<Rigidbody>().velocity;
                 v3.y = 0;
                 GetComponent<Rigidbody>().velocity = v3;
-                anim.SetBool("Jumping", true);
+                
                 Debug.Log("jumping on");
                 //anim.SetTrigger("Jumping");
-                GetComponent<Rigidbody>().AddForce(new Vector2(0, JumpSpeed), ForceMode.Impulse);
-                if (!isOnGround)
-                {
-                    anim.SetBool("Jumping", false);
-                    Debug.Log("Jumping state");
-                }
-                if (isOnGround)
-                {
-                    anim.SetBool("Idle", true);
-                    Debug.Log("Idle On");
-                }
-            }
+                GetComponent<Rigidbody>().AddForce(new Vector2(0, JumpSpeed), ForceMode.Impulse);    
+			}
         }
-        else
-        {
-            anim.SetBool("Jumping", false);
-            Debug.Log("jumping off");
-        }
+
         //check gravity 
         if (!isOnGround)
         {
+			anim.SetBool("Jumping", false);
             Physics.gravity = new Vector3(0, -20.0F, 0);
         }
-
-
-
     }
 
 
@@ -571,11 +556,11 @@ public class OriginPlayerScript : MonoBehaviour {
         Debug.Log("Firing Flame");
         if (facingRight)
         {
-            CloneFlame.GetComponent<Rigidbody2D>().AddForce(Vector2.one.normalized * flameSpeed, ForceMode2D.Impulse);
+			CloneFlame.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,1) * flameSpeed, ForceMode2D.Impulse);
         }
         else
         {
-            CloneFlame.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 1) * flameSpeed, ForceMode2D.Impulse);
+			CloneFlame.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 1) * flameSpeed, ForceMode2D.Impulse);
         }
     }
 

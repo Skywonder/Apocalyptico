@@ -11,6 +11,24 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1000012782370978}
   m_IsPrefabParent: 1
+--- !u!1 &1000011470419410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000010908596088}
+  - 50: {fileID: 50000010712075318}
+  - 61: {fileID: 61000012940266596}
+  - 114: {fileID: 114000013580435396}
+  m_Layer: 0
+  m_Name: HitChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1000012782370978
 GameObject:
   m_ObjectHideFlags: 0
@@ -20,11 +38,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010865168800}
   - 212: {fileID: 212000010591870066}
-  - 114: {fileID: 114000010401725428}
   - 95: {fileID: 95000012378138758}
   - 54: {fileID: 54000010445725680}
   - 65: {fileID: 65000012764286804}
   - 135: {fileID: 135000010124468902}
+  - 114: {fileID: 114000012603007562}
   m_Layer: 0
   m_Name: PlayerV2
   m_TagString: Player
@@ -42,9 +60,40 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 4000010908596088}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &4000010908596088
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011470419410}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000010865168800}
+  m_RootOrder: 0
+--- !u!50 &50000010712075318
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011470419410}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!54 &54000010445725680
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -60,6 +109,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!61 &61000012940266596
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011470419410}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.016306141, y: -0.004891777}
+  serializedVersion: 2
+  m_Size: {x: 0.20425506, y: 0.29230863}
 --- !u!65 &65000012764286804
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -89,7 +152,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114000010401725428
+--- !u!114 &114000012603007562
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -97,23 +160,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012782370978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fd44dd8874ed144aaf971777225b0ec, type: 3}
+  m_Script: {fileID: 11500000, guid: f060b59274bf2684598406670716ff27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1000012782370978}
   bulletSpeed: 100
+  flameSpeed: 50
   bullet: {fileID: 1000010463370594, guid: aae3fa66462ea429e96fba1aaea023a6, type: 2}
+  flame: {fileID: 1000013087741142, guid: eb2eb7669841d344f92c3e7d04e0648c, type: 2}
   invincible: 0
   invisible: 0
   isDead: 0
   statUrl: Assests/Data Sheets/PlayerStats.csv
   JumpSpeed: 200
-  JumpDamping: 0.1
+  JumpDamping: 0.5
   isOnGround: 0
   crouching: 0
   facingRight: 1
   jump: 0
-  Speed: 20
+  Speed: 15
+  weaponToggleKey: 
+--- !u!114 &114000013580435396
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011470419410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1483c4913fb2e42a2fa904ebfb73b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitpoint: 1000
 --- !u!135 &135000010124468902
 SphereCollider:
   m_ObjectHideFlags: 1
