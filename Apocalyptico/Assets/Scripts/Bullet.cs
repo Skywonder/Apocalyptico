@@ -4,29 +4,27 @@ using System.Collections;
 public class Bullet : MonoBehaviour
 {
     public bool left;
-    public float speed;
 
     // Use this for initialization
     void Start()
     {
+        Vector2 direction;
+
         if (left)
         {
-            speed = -2.5f;
+            direction = new Vector2(-1.0f, 4.0f);
         }
         else
         {
-            speed = 2.5f;
+            direction = new Vector2(1.0f, 4.0f);
         }
+
+        this.GetComponent<Rigidbody>().AddForce(direction * 225f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 position = transform.position;
-
-        position = new Vector2(position.x + speed * Time.deltaTime, position.y);
-
-        transform.position = position;
     }
 
     void OnCollisionEnter(Collision coll)
