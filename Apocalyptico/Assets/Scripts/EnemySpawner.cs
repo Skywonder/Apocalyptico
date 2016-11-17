@@ -3,15 +3,17 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour {
     public GameObject enemy;
-    public float spawnTime = 0.7f;
+    public float setSpawnTime;
     public int maxSpawn = 3;
 
     private Transform player;
     private GameObject newEnemy;
+    private float spawnTime;
 
     // Use this for initialization
     void Start () {
 	    player = GameObject.Find("Player").transform;
+        spawnTime = setSpawnTime;
     }
 	
 	// Update is called once per frame
@@ -22,7 +24,7 @@ public class EnemySpawner : MonoBehaviour {
             if (spawnTime <= 0)
             {
                 newEnemy = (GameObject)Instantiate(enemy, transform.position, Quaternion.identity);
-                spawnTime = 0.7f;
+                spawnTime = setSpawnTime;
                 maxSpawn -= 1;
             }
         }

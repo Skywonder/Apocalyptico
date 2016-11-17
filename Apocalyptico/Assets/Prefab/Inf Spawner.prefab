@@ -24,7 +24,7 @@ GameObject:
   - 65: {fileID: 65000011911591686}
   - 54: {fileID: 54000011544786262}
   - 95: {fileID: 95000013020867948}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Inf Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

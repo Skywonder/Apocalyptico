@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-    public float speed = 9f;
+    public float speed = 5f;
     public bool isOnGround = false;
 
     private Transform player;

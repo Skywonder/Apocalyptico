@@ -8,6 +8,7 @@ TagManager:
   - Box
   - bullet
   - flame
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -53,6 +54,9 @@ TagManager:
     locked: 0
   - name: player
     uniqueID: 305852415
+    locked: 0
+  - name: Enemy
+    uniqueID: 1996211381
     locked: 0
   - name: frontTrees
     uniqueID: 4003957613

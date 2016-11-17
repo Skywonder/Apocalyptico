@@ -12,11 +12,12 @@ public class Bullet : MonoBehaviour
 
         if (left)
         {
-            direction = new Vector2(-1.0f, 1.0f);
+            direction = new Vector2(-1.0f, 0.5f);
         }
         else
         {
-            direction = new Vector2(1.0f, 1.0f);
+            GetComponent<SpriteRenderer>().flipX = true;
+            direction = new Vector2(1f, 0.5f);
         }
 
         this.GetComponent<Rigidbody>().AddForce(direction * 500f);
@@ -29,6 +30,9 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision coll)
     {
-        Destroy(gameObject);
+        if(coll.gameObject.tag != "Enemy")
+        {
+            Destroy(gameObject);
+        }
     }
 }

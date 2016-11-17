@@ -48,39 +48,32 @@ public class Shooter : MonoBehaviour {
 
         if (Vector2.Distance(transform.position, player.position) <= 10f)
         {
-            Shoot();
+            spawnTime -= Time.deltaTime;
+
+            if (spawnTime <= 0)
+            {
+                StartCoroutine(Shoot());
+            }
         }
     }
 
-    void Shoot()
+    IEnumerator Shoot()
     {
-        Vector2 offset;
-
-        spawnTime -= Time.deltaTime;
+        anim.SetBool("Shoot", true);
+        yield return new WaitForSeconds(0.4f);
+        GameObject newBullet = (GameObject)Instantiate(bullet, transform.position, Quaternion.identity);
 
         if (GetComponent<SpriteRenderer>().flipX == false)
         {
-            offset = new Vector2(transform.position.x - 1.5f, transform.position.y + 0.5f);
+            newBullet.GetComponent<Bullet>().left = true;
         }
         else
         {
-            offset = new Vector2(transform.position.x + 1.5f, transform.position.y + 0.5f);
+            newBullet.GetComponent<Bullet>().left = false;
         }
 
-        if (spawnTime <= 0)
-        {
-            GameObject newBullet = (GameObject)Instantiate(bullet, offset, Quaternion.identity);
-            if (GetComponent<SpriteRenderer>().flipX == false)
-            {
-                newBullet.GetComponent<Bullet>().left = true;
-            }
-            else
-            {
-                newBullet.GetComponent<Bullet>().left = false;
-            }
-
-            spawnTime = 3f;
-        }
+        anim.SetBool("Shoot", false);
+        spawnTime = 3f;
     }
 
     void OnCollisionEnter(Collision coll)

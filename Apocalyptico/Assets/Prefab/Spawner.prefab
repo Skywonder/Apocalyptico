@@ -53,8 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1000010822402804, guid: 36e332990af7c4646ba0c38d4f9a9bbc, type: 2}
-  player: {fileID: 0}
-  spawnTime: 1
+  setSpawnTime: 0.6
   maxSpawn: 3
 --- !u!212 &212000013455197256
 SpriteRenderer:
