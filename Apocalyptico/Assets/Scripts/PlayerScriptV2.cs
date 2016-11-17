@@ -15,10 +15,6 @@ public class PlayerScriptV2 : MonoBehaviour{
 	public bool isDead = false;
 	public string statUrl = "Assests/Data Sheets/PlayerStats.csv";
 	private BoxCollider boxcol;
-	private float x_width;
-	private float y_height;
-	private float x_offset;
-	private float y_offset;
 	public float JumpSpeed;
 	public float JumpDamping = 0.1f;
 	public bool isOnGround = false;
@@ -42,7 +38,7 @@ public class PlayerScriptV2 : MonoBehaviour{
 
 	//set this to check instantiation
 	private bool isCreated;
-	private float startTime;
+
 	//for animation
 	Animator anim;
 	public bool facingRight = true;
@@ -51,10 +47,6 @@ public class PlayerScriptV2 : MonoBehaviour{
 
 	//for other variables
 	private int curHealth; //<--the only value changing
-
-	//check fire....
-	private float lastFire;
-	private float fireRate;
 
     //weapon toggle key
     public string weaponToggleKey;
@@ -74,10 +66,6 @@ public class PlayerScriptV2 : MonoBehaviour{
 
 		Debug.Log(maxHealth);
 		curHealth = maxHealth;
-		x_width = GetComponent<BoxCollider>().size.x;
-		y_height = GetComponent<BoxCollider>().size.y;
-		//x_offset = GetComponent<BoxCollider>().offset.x;
-		//y_offset = GetComponent<BoxCollider>().offset.y;
 		boxcol = player.GetComponent<BoxCollider>();
 		anim = GetComponent<Animator>();
 

@@ -6,18 +6,32 @@ public class Enemy : MonoBehaviour {
     public bool isOnGround = false;
 
     private Transform player;
+    private GameObject Player;
     private bool hit;
     Animator anim;
+    
+    //added variables by Kuan
+    public int hp; 
+    [SerializeField]
+    private int curHealth;
+    public int maxHealth
+    { //Max avaliable Hp ...does not change
+        get { return hp; }//max health depends on level
+    }
+    //end of added variable
 
     // Use this for initialization
     void Start () {
         player = GameObject.Find("Player").GetComponent<Transform>();
+        Player = GameObject.Find("Player");
         hit = false;
         anim = GetComponent<Animator>();
+        curHealth = maxHealth;
     }
 	
 	// Update is called once per frame
 	void Update () {
+        
         if (!isOnGround)
         {
             Physics.gravity = new Vector3(0, -10f, 0);
@@ -35,6 +49,12 @@ public class Enemy : MonoBehaviour {
         {
             transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         }
+
+        //added by Kuan
+        if (curHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter(Collision coll)
@@ -43,14 +63,48 @@ public class Enemy : MonoBehaviour {
         {
             isOnGround = true;
         }
-        
+
+        Debug.Log("Hit by Object");
+        if (coll.gameObject.tag == "bullet")
+        {
+            Debug.Log("Destroy object");
+            Destroy(coll.gameObject);
+            takehit();
+        }
+        if (coll.gameObject.tag == "flame")
+        {
+            Debug.Log("Destroy object with flame");
+            Destroy(coll.gameObject);
+            takehit();
+        }
+    
         if (coll.gameObject.tag == "Player")
         {
             Debug.Log("Hit");
             hit = true;
+            //Physics.IgnoreLayerCollision(9, 13, true);
+            Physics.IgnoreCollision(coll.collider, GetComponent<Collider>());
             StartCoroutine(Explode());
         }
     }
+
+    //Added by Kuan
+
+    void takehit()
+    {
+        Debug.Log(curHealth);
+        if (curHealth > 0)
+        {
+            curHealth -= 1;
+        }
+        else if (curHealth <= 0)
+        {
+            curHealth = 0;
+        }
+    }
+
+    //End of added
+
 
     void OnCollisionStay(Collision coll)
     {
@@ -67,10 +121,12 @@ public class Enemy : MonoBehaviour {
 
     IEnumerator Explode()
     {
-        Physics.IgnoreCollision(player.GetComponent<BoxCollider>(), GetComponent<BoxCollider>());
-        Physics.IgnoreCollision(player.GetComponent<SphereCollider>(), GetComponent<BoxCollider>());
+        Debug.Log("Exploding");
         anim.SetBool("Hit", true);
         yield return new WaitForSeconds(0.75f);
         Destroy(gameObject);
     }
+
+    
+
 }

@@ -15,7 +15,7 @@ public class checkHitScript : MonoBehaviour {
     }
 
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter(Collider collision)
     {
         Debug.Log("Hit by Object");
         if (collision.gameObject.tag == "bullet")

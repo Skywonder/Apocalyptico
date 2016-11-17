@@ -4,6 +4,7 @@ using System.Collections;
 public class OriginPlayerScript : MonoBehaviour {
 
     public GameObject player;
+    public int hp = 10;
     public float bulletSpeed = 100;
     public float flameSpeed = 50;
     public GameObject bullet; //get the bullet object
@@ -13,10 +14,6 @@ public class OriginPlayerScript : MonoBehaviour {
     public bool isDead = false;
     public string statUrl = "Assests/Data Sheets/PlayerStats.csv";
     private BoxCollider boxcol;
-    private float x_width;
-    private float y_height;
-    private float x_offset;
-    private float y_offset;
     public float JumpSpeed;
     public float JumpDamping = 0.1f;
     public bool isOnGround = false;
@@ -40,7 +37,7 @@ public class OriginPlayerScript : MonoBehaviour {
 
     //set this to check instantiation
     private bool isCreated;
-    private float startTime;
+
     //for animation
     Animator anim;
     public bool facingRight = true;
@@ -48,11 +45,8 @@ public class OriginPlayerScript : MonoBehaviour {
     public float Speed = 1.5f; //for movement
 
     //for other variables
+    [SerializeField]//using serializedField makes private variable visible
     private int curHealth; //<--the only value changing
-
-    //check fire....
-    private float lastFire;
-    private float fireRate;
 
     //weapon toggle key
     public string weaponToggleKey;
@@ -60,37 +54,23 @@ public class OriginPlayerScript : MonoBehaviour {
     //check fire timer
     private float timer;
 
-    public int Level
-    {//Level == powerup <-- if we ever decide to have it
-        get { return 1; }
-    }
 
     public int maxHealth
     { //Max avaliable Hp ...does not change
-        get { return 3; }//max health depends on level
+        get { return hp; }//max health depends on level
     }
 
-    void Awake()
+    void Start()
     {//variable only set on start
 
         Debug.Log(maxHealth);
         curHealth = maxHealth;
-        x_width = GetComponent<BoxCollider>().size.x;
-        y_height = GetComponent<BoxCollider>().size.y;
-        //x_offset = GetComponent<BoxCollider>().offset.x;
-        //y_offset = GetComponent<BoxCollider>().offset.y;
         boxcol = player.GetComponent<BoxCollider>();
         anim = GetComponent<Animator>();
 
         //set default weapon to to fire3 mode
         weaponToggleKey = "Fire2";
-    }
-
-    void start()
-    {
-
         layerMask = LayerMask.NameToLayer("Player");
-
     }
 
     void Update()
@@ -116,7 +96,7 @@ public class OriginPlayerScript : MonoBehaviour {
         }
 
     }
-
+    
     public void AdjustCurrentHealth(int adj)
     {
         curHealth += adj;
@@ -525,13 +505,13 @@ public class OriginPlayerScript : MonoBehaviour {
         if (facingRight)
         {
 			Clone.GetComponent<SpriteRenderer>().flipX = true;           
-			Clone.GetComponent<Rigidbody2D>().AddForce(Vector2.right.normalized * bulletSpeed, ForceMode2D.Impulse);
+			Clone.GetComponent<Rigidbody>().AddForce(Vector2.right.normalized * bulletSpeed, ForceMode.Impulse);
 
         }
         else
         {
 			Clone.GetComponent<SpriteRenderer>().flipX = false;
-            Clone.GetComponent<Rigidbody2D>().AddForce(Vector2.left.normalized * bulletSpeed, ForceMode2D.Impulse);
+            Clone.GetComponent<Rigidbody>().AddForce(Vector2.left.normalized * bulletSpeed, ForceMode.Impulse);
 
         }
     }
@@ -561,12 +541,12 @@ public class OriginPlayerScript : MonoBehaviour {
         if (facingRight)
         {
 			CloneFlame.GetComponent<SpriteRenderer>().flipX = true;
-			CloneFlame.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,1) * flameSpeed, ForceMode2D.Impulse);
+			CloneFlame.GetComponent<Rigidbody>().AddForce(new Vector2(1,1) * flameSpeed, ForceMode.Impulse);
         }
         else
         {
 			CloneFlame.GetComponent<SpriteRenderer>().flipX = false;
-			CloneFlame.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 1) * flameSpeed, ForceMode2D.Impulse);
+			CloneFlame.GetComponent<Rigidbody>().AddForce(new Vector2(-1, 1) * flameSpeed, ForceMode.Impulse);
         }
     }
 
@@ -580,7 +560,41 @@ public class OriginPlayerScript : MonoBehaviour {
             anim.SetBool("Ground", true);
         }
 
+        Debug.Log("Hit by Object");
+        //layer 12 = "enemybullet"
+        if (col.gameObject.layer == 11)
+        {
+            Debug.Log("Destroy object");
+            Destroy(col.gameObject);
+            takehit();
+        }
+
+        //becaue its at layer 9 ("Enemy")
+        if (col.gameObject.layer == 9)
+        {
+            Debug.Log("Collision with Enemy");
+            takehit();
+        }
+
     }
+
+    //For Richard add to adjust Enemy Script
+    //The damage calculation - takes object curHealth instead
+
+    void takehit()
+    {
+        Debug.Log(curHealth);
+        if (curHealth > 0)
+        {
+            curHealth -= 1;
+        }
+        else if (curHealth <= 0)
+        {
+            curHealth = 0;
+        }
+    }
+    //checks for DAMAGING Object OR ENEMY Object 
+
     void OnCollisionStay(Collision col) //checks stay because player wont reenter
     {
         if (col.gameObject.tag == "ground")

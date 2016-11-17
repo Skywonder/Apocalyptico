@@ -11,7 +11,7 @@ public class PlayerGUI : MonoBehaviour {
     Text text;
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
         maxhp = (int)player.GetComponent<PlayerScript>().getMaxHealth();
         
         text = GetComponent<Text>();
