@@ -4,9 +4,8 @@ using System.Collections;
 public class Enemy : MonoBehaviour {
     public float speed = 5f;
     public bool isOnGround = false;
-
-    private Transform player;
-    private GameObject Player;
+    
+    private GameObject player;
     private bool hit;
     Animator anim;
     
@@ -21,36 +20,35 @@ public class Enemy : MonoBehaviour {
     //end of added variable
 
     // Use this for initialization
-    void Start () {
-        player = GameObject.Find("Player").GetComponent<Transform>();
-        Player = GameObject.Find("Player");
+    void Start ()
+    {
+        player = GameObject.Find("Player");
         hit = false;
         anim = GetComponent<Animator>();
         curHealth = maxHealth;
     }
 	
-	// Update is called once per frame
-	void Update () {
-        
+    void FixedUpdate()
+    {
         if (!isOnGround)
         {
             Physics.gravity = new Vector3(0, -10f, 0);
         }
 
-        if (transform.position.x < player.position.x)
+        if (transform.position.x < player.GetComponent<Transform>().position.x)
         {
             GetComponent<SpriteRenderer>().flipX = true;
-        } else
+        }
+        else
         {
             GetComponent<SpriteRenderer>().flipX = false;
         }
-        
+
         if (!hit)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, player.GetComponent<Transform>().position, speed * Time.deltaTime);
         }
 
-        //added by Kuan
         if (curHealth <= 0)
         {
             Destroy(gameObject);
