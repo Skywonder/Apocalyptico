@@ -1,4 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Kuan(Testing Dmg).unity
+- path: C:/Users/Richard/Downloads/2DPlatformer-Tutorial-master/2DPlatformer-Tutorial-master/Platformer
+    E11/Assets/Scene.unity
   isLoaded: 1
   isActive: 1
