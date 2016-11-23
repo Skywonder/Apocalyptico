@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RichardController : MonoBehaviour {
-    public LayerMask collisionMask;
+public class WalkerController : MonoBehaviour {
+    public LayerMask groundMask;
+    public LayerMask playerMask;
 
     const float skinWidth = .015f;
     public int horizontalRayCount = 4;
@@ -17,12 +18,17 @@ public class RichardController : MonoBehaviour {
     BoxCollider2D boxColl;
     RaycastOrigins raycastOrigins;
     public CollisionInfo collisions;
-    
+
 
     void Start()
     {
         boxColl = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
+    }
+
+    public void PlayerCollision()
+    {
+        //RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.forward, rayLength, playerMask);
     }
 
     public void Move(Vector3 velocity)
@@ -43,7 +49,7 @@ public class RichardController : MonoBehaviour {
         {
             VerticalCollisions(ref velocity);
         }
-        
+
         transform.Translate(velocity);
     }
 
@@ -56,7 +62,7 @@ public class RichardController : MonoBehaviour {
         {
             Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
             rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, groundMask);
 
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
 
@@ -108,7 +114,7 @@ public class RichardController : MonoBehaviour {
         {
             Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
             rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, groundMask);
 
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
 
@@ -132,7 +138,7 @@ public class RichardController : MonoBehaviour {
             float directionX = Mathf.Sign(velocity.x);
             rayLength = Mathf.Abs(velocity.x) + skinWidth;
             Vector2 rayOrigin = ((directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight) + Vector2.up * velocity.y;
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, groundMask);
 
             if (hit)
             {
@@ -165,7 +171,7 @@ public class RichardController : MonoBehaviour {
     {
         float directionX = Mathf.Sign(velocity.x);
         Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Infinity, collisionMask);
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Infinity, groundMask);
 
         if (hit)
         {
@@ -240,5 +246,4 @@ public class RichardController : MonoBehaviour {
             slopeAngle = 0;
         }
     }
-
 }
