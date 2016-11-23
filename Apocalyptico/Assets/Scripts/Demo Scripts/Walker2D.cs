@@ -55,14 +55,8 @@ public class Walker2D : MonoBehaviour {
         if (coll.gameObject.tag == "Player")
         {
             hit = true;
-            StartCoroutine(Explode());
+            anim.SetBool("Hit", true);
+            Destroy(gameObject, 0.75f);
         }
-    }
-
-    IEnumerator Explode()
-    {
-        anim.SetBool("Hit", true);
-        yield return new WaitForSeconds(0.75f);
-        Destroy(gameObject);
     }
 }

@@ -16,6 +16,9 @@ public class RichardPlayer : MonoBehaviour
     Vector3 velocity;
     float velocityXSmoothing;
 
+    private bool hit;
+    private float invicibleTimer = 2.0f;
+
     RichardController controller;
 
     void Start()
@@ -29,6 +32,15 @@ public class RichardPlayer : MonoBehaviour
 
     void Update()
     {
+        if (hit)
+        {
+            invicibleTimer -= Time.deltaTime;
+            if (invicibleTimer <= 0)
+            {
+                GetComponent<BoxCollider2D>().isTrigger = true;
+                invicibleTimer = 2.0f;
+            }
+        }
 
         if (controller.collisions.above || controller.collisions.below)
         {
@@ -61,5 +73,16 @@ public class RichardPlayer : MonoBehaviour
         {
             Destroy(gameObject);
         } 
+    }
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "Enemy")
+        {
+            hit = true;
+            GetComponent<BoxCollider2D>().isTrigger = false;
+            Debug.Log("Hit");
+            hp -= 1;
+        }
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class EnemyInfSpawner : MonoBehaviour {
+    public int hp = 3;
+
     public GameObject enemy;
     public float spawnTime = 2.5f;
 
