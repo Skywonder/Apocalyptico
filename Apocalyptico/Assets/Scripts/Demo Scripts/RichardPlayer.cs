@@ -84,5 +84,11 @@ public class RichardPlayer : MonoBehaviour
             Debug.Log("Hit");
             hp -= 1;
         }
+
+        if (coll.gameObject.tag == "Obstacle")
+        {
+            Camera.main.transform.parent = null; // until camera gets its own script
+            Destroy(gameObject);
+        }
     }
 }

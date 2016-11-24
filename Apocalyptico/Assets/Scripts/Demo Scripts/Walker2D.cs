@@ -4,7 +4,7 @@ using System.Collections;
 public class Walker2D : MonoBehaviour {
     public int hp = 1;
     
-    float moveSpeed = 3;
+    float moveSpeed = 12;
     float gravity;
 
     WalkerController controller;
@@ -28,6 +28,8 @@ public class Walker2D : MonoBehaviour {
     {
         if (!hit)
         {
+
+
             Vector2 move;
 
             if (player.position.x > transform.position.x)
