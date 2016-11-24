@@ -4,6 +4,8 @@ using System.Collections;
 public class RichardPlayer : MonoBehaviour
 {
     public int hp = 5;
+    public GameObject bullet;
+    public float setCooldown = .5f;
 
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
@@ -18,6 +20,9 @@ public class RichardPlayer : MonoBehaviour
 
     private bool hit;
     private float invicibleTimer = 2.0f;
+    private GameObject newBullet;
+    private Vector3 offset = new Vector3(1f, 0f, 0f);
+    private float cooldown;
 
     RichardController controller;
 
@@ -28,6 +33,8 @@ public class RichardPlayer : MonoBehaviour
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         print("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
+
+        cooldown = 0f;
     }
 
     void Update()
@@ -58,16 +65,19 @@ public class RichardPlayer : MonoBehaviour
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
 
-        if (velocity.x < 0)
+        controller.Move(velocity * Time.deltaTime);
+
+        if (Input.GetMouseButtonDown(0) && cooldown <= 0)
         {
-            GetComponent<SpriteRenderer>().flipX = true;
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().flipX = false;
+            newBullet = (GameObject)Instantiate(bullet, transform.position + offset, Quaternion.identity);
+            newBullet.GetComponent<PlayerBullet>().left = GetComponent<SpriteRenderer>().flipX;
+            cooldown = setCooldown;
         }
 
-        controller.Move(velocity * Time.deltaTime);
+        if (cooldown > 0)
+        {
+            cooldown -= Time.deltaTime;
+        }
 
         if (hp <= 0)
         {

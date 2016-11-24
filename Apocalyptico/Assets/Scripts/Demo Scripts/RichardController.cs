@@ -43,7 +43,16 @@ public class RichardController : MonoBehaviour {
         {
             VerticalCollisions(ref velocity);
         }
-        
+
+        if (velocity.x < 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+
         transform.Translate(velocity);
     }
 

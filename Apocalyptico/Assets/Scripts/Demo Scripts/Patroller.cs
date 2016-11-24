@@ -1,25 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Walker2D : MonoBehaviour {
+public class Patroller : MonoBehaviour {
+
     public int hp = 1;
-    
-    float moveSpeed = 12;
+    public float distanceX;
+
+    float moveSpeed = 7;
     float gravity;
 
     WalkerController controller;
-
-    private Transform player;
+    
     private bool hit = false;
+    private float startPointX;
+    private float endPointX;
+    private bool towardsEnd = false;
+    private Vector2 move;
     Animator anim;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         controller = GetComponent<WalkerController>();
 
         gravity = -10;
 
-        player = GameObject.Find("Player").transform;
+        startPointX = transform.position.x;
+        endPointX = transform.position.x + distanceX;
+
         anim = GetComponent<Animator>();
     }
 
@@ -28,18 +36,19 @@ public class Walker2D : MonoBehaviour {
     {
         if (!hit)
         {
-
-
-            Vector2 move;
-
-            if (player.position.x > transform.position.x)
+            if (transform.position.x > endPointX)
             {
-                GetComponent<SpriteRenderer>().flipX = true;
+                towardsEnd = false;
+            } else if (transform.position.x < startPointX) {
+                towardsEnd = true;
+            }
+
+            if (towardsEnd)
+            {
                 move = new Vector2(moveSpeed, gravity);
             }
             else
             {
-                GetComponent<SpriteRenderer>().flipX = false;
                 move = new Vector2(-moveSpeed, gravity);
             }
 

@@ -50,6 +50,15 @@ public class WalkerController : MonoBehaviour {
             VerticalCollisions(ref velocity);
         }
 
+        if (velocity.x < 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+
         transform.Translate(velocity);
     }
 
