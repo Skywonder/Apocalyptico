@@ -10,6 +10,7 @@ TagManager:
   - flame
   - Enemy
   - Obstacle
+  - Bullet
   layers:
   - Default
   - TransparentFX

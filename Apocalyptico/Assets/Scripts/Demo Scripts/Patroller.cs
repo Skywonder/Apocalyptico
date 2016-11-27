@@ -57,7 +57,9 @@ public class Patroller : MonoBehaviour {
 
         if (hp <= 0)
         {
-            Destroy(gameObject);
+            hit = true;
+            anim.SetBool("Hit", true);
+            Destroy(gameObject, 0.75f);
         }
     }
 
@@ -68,6 +70,11 @@ public class Patroller : MonoBehaviour {
             hit = true;
             anim.SetBool("Hit", true);
             Destroy(gameObject, 0.75f);
+        }
+
+        if (coll.gameObject.tag == "Bullet")
+        {
+            hp -= 1;
         }
     }
 }

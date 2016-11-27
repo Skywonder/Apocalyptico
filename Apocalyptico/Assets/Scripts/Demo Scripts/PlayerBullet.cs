@@ -5,12 +5,14 @@ public class PlayerBullet : MonoBehaviour {
     public bool left;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 	    if (left)
         {
             transform.position += new Vector3(-2f, 0, 0);
@@ -19,4 +21,9 @@ public class PlayerBullet : MonoBehaviour {
             transform.position += new Vector3(2f, 0, 0);
         }
 	}
+
+    void OnTriggerEnter2D (Collider2D coll)
+    {
+        Destroy(gameObject);
+    }
 }

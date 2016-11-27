@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class RichardController : MonoBehaviour {
+    // need to properly swap raycast if player looks left
+
     public LayerMask collisionMask;
 
     const float skinWidth = .015f;

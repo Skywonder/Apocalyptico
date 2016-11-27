@@ -44,7 +44,9 @@ public class Chaser : MonoBehaviour {
 
         if (hp <= 0)
         {
-            Destroy(gameObject);
+            hit = true;
+            anim.SetBool("Hit", true);
+            Destroy(gameObject, 0.75f);
         }
     }
 
@@ -55,6 +57,12 @@ public class Chaser : MonoBehaviour {
             hit = true;
             anim.SetBool("Hit", true);
             Destroy(gameObject, 0.75f);
+        }
+
+        // fix this
+        if (coll.gameObject.tag == "Bullet")
+        {
+            hp -= 1;
         }
     }
 }

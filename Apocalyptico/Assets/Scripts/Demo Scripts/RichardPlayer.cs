@@ -21,7 +21,7 @@ public class RichardPlayer : MonoBehaviour
     private bool hit;
     private float invicibleTimer = 2.0f;
     private GameObject newBullet;
-    private Vector3 offset = new Vector3(1f, 0f, 0f);
+    private Vector3 offset;
     private float cooldown;
 
     RichardController controller;
@@ -69,6 +69,14 @@ public class RichardPlayer : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && cooldown <= 0)
         {
+            if (GetComponent<SpriteRenderer>().flipX)
+            {
+                offset = new Vector3(-2.5f, 0f, 0f);
+            } else
+            {
+                offset = new Vector3(2.5f, 0f, 0f);
+            }
+
             newBullet = (GameObject)Instantiate(bullet, transform.position + offset, Quaternion.identity);
             newBullet.GetComponent<PlayerBullet>().left = GetComponent<SpriteRenderer>().flipX;
             cooldown = setCooldown;
@@ -91,7 +99,6 @@ public class RichardPlayer : MonoBehaviour
         {
             hit = true;
             GetComponent<BoxCollider2D>().isTrigger = false;
-            Debug.Log("Hit");
             hp -= 1;
         }
 
