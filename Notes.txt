@@ -1,8 +1,0 @@
-NOTE: Reminders
-
-Making Sure that you are only working on your own scene and that all functions/scripts are working correctly before commit. Always remember to sync...
-
-Do not change or modify any scripts in the Scripts folder unless you wrote it!! 
-
-You can create another folder and name it just like your scene: Name_Script, then copy and paste the script you did like to fiddle with and modify it for testing. 
-
