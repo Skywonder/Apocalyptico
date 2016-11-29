@@ -54,7 +54,18 @@ public class RichardPlayer : MonoBehaviour
             velocity.y = 0;
         }
 
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		if (Input.GetAxisRaw("Horizontal") == -1)
+		{
+			GetComponent<SpriteRenderer>().flipX = true;
+		}
+		else if (Input.GetAxisRaw("Horizontal") == 1)
+		{
+			GetComponent<SpriteRenderer>().flipX = false;
+		}
+
+		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+
 
         if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below)
         {
@@ -63,7 +74,8 @@ public class RichardPlayer : MonoBehaviour
 
         float targetVelocityX = input.x * moveSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-        velocity.y += gravity * Time.deltaTime;
+	
+		velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
 

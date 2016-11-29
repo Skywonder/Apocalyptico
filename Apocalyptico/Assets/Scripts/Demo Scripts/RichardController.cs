@@ -26,7 +26,7 @@ public class RichardController : MonoBehaviour {
         boxColl = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
     }
-
+		
     public void Move(Vector3 velocity)
     {
         UpdateRaycastOrigins();
@@ -45,16 +45,7 @@ public class RichardController : MonoBehaviour {
         {
             VerticalCollisions(ref velocity);
         }
-
-        if (velocity.x < 0)
-        {
-            GetComponent<SpriteRenderer>().flipX = true;
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().flipX = false;
-        }
-
+			
         transform.Translate(velocity);
     }
 
