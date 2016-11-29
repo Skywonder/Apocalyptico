@@ -51,6 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7bdc80505b3a7418c4d737b194d18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1000012038716240, guid: ad964d1f12f0bc7408ade98230ccfcbb, type: 2}
+  enemy: {fileID: 1000013426821658, guid: 5fb572eb7ef76fd498c2175db0458d89, type: 2}
   setSpawnTime: 0.6
   maxSpawn: 3

@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 3
-  enemy: {fileID: 1000012038716240, guid: ad964d1f12f0bc7408ade98230ccfcbb, type: 2}
+  enemy: {fileID: 1000013426821658, guid: 5fb572eb7ef76fd498c2175db0458d89, type: 2}
   spawnTime: 2.5
 --- !u!212 &212000012929747462
 SpriteRenderer:
