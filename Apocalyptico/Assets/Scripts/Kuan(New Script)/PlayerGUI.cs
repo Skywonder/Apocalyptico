@@ -12,15 +12,16 @@ public class PlayerGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        maxhp = (int)player.GetComponent<PlayerScript>().getMaxHealth();
-        
+        maxhp = (int)player.GetComponent<JohnPlayerScript>().getMaxHealth();
+        //set player hp to max hp at beginning of level
+        hithp = maxhp;
         text = GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		hithp = (int)hitchecker.GetComponent<checkHitScript>().hitpoint;
+		hithp = (int)player.GetComponent<JohnPlayerScript>().getCurHealth();
         text.text = "Player Health: " + hithp;
-	}
+    }
 }

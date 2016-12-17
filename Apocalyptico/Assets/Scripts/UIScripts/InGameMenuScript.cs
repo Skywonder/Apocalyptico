@@ -13,6 +13,7 @@ public class InGameMenuScript : MonoBehaviour {
         quitMenu = quitMenu.GetComponent<Canvas>();
         resumeText = resumeText.GetComponent<Button>();
         exitText = exitText.GetComponent<Button>();
+
         quitMenu.enabled = false;
     }
     

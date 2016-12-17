@@ -2,10 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class WeaponMagazineSize : MonoBehaviour
+public class MagazineGUI : MonoBehaviour
 {
 
-    public GameObject magazineSize;
+    public GameObject player;
     private int currentMagSize;
     Text text;
 
@@ -18,10 +18,8 @@ public class WeaponMagazineSize : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        currentMagSize = (int)magazineSize.GetComponent<PlayerScript>().defaultWeaponMagazine;
+        currentMagSize = (int)player.GetComponent<WeaponConroller>().defaultWeaponMagazine;
         text.text = "Magazine Size: " + (currentMagSize);
         Debug.Log("Magazine Size: " + currentMagSize);
-        */
     }
 }

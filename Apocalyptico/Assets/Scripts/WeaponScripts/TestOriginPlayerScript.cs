@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class OriginPlayerScript : MonoBehaviour
-{
+public class TestOriginPlayerScript : MonoBehaviour {
 
     public GameObject player;
     public int hp = 10;
     public float bulletSpeed = 100;
-    public float flameSpeed = 50;
+    public float flameSpeed = 30;
     public GameObject bullet; //get the bullet object
     public GameObject flame;  //get the flame object
     public bool invincible = false;
@@ -70,7 +69,7 @@ public class OriginPlayerScript : MonoBehaviour
         anim = GetComponent<Animator>();
 
         //set default weapon to to fire3 mode
-        weaponToggleKey = "Fire2";
+        weaponToggleKey = "Fire3";
         layerMask = LayerMask.NameToLayer("Player");
     }
 
@@ -78,26 +77,8 @@ public class OriginPlayerScript : MonoBehaviour
     {
         Debug.Log(getMaxHealth());
         AdjustCurrentHealth(0);
-        WeaponToggle();
-        if (Input.GetKey(KeyCode.F))
-        {
-            Debug.Log("fire version 1");
-            //Debug.Log("fire version 2");
-            //Fire();
-            //Fire2();
-
-            //call method that controls the current selected weapon
-            WeaponController();
-
-        }
-        else//if nothing is done reset created
-        {
-            anim.SetBool("Fire", false);
-            isCreated = false;
-        }
-
     }
-
+    
     public void AdjustCurrentHealth(int adj)
     {
         curHealth += adj;
@@ -291,30 +272,28 @@ public class OriginPlayerScript : MonoBehaviour
 
 
         //jump
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) )
         {
-            if (!crouching && isOnGround)
-            {
-                anim.SetBool("Jumping", true);
+			if (!crouching && isOnGround)
+			{	
+				anim.SetBool("Jumping", true);
                 Vector3 v3 = GetComponent<Rigidbody>().velocity;
                 v3.y = 0;
                 GetComponent<Rigidbody>().velocity = v3;
-
+                
                 Debug.Log("jumping on");
                 //anim.SetTrigger("Jumping");
-                GetComponent<Rigidbody>().AddForce(new Vector2(0, JumpSpeed), ForceMode.Impulse);
-            }
+                GetComponent<Rigidbody>().AddForce(new Vector2(0, JumpSpeed), ForceMode.Impulse);    
+			}
         }
 
         //check gravity 
         if (!isOnGround)
         {
-            anim.SetBool("Jumping", false);
+			anim.SetBool("Jumping", false);
             Physics.gravity = new Vector3(0, -20.0F, 0);
         }
     }
-
-
 
     public void TakeDamage(int amount)
     {
@@ -362,7 +341,6 @@ public class OriginPlayerScript : MonoBehaviour
         //display death animation and stop all action (movement, ability)
     }
 
-
     void LateUpdate()
     {
         //apply movement slowly
@@ -371,6 +349,7 @@ public class OriginPlayerScript : MonoBehaviour
 
     //press F key to fire weapon
     // version 1...can only single fire
+    /*
     void Fire()
     {
         Debug.Log("Fire1");
@@ -388,7 +367,7 @@ public class OriginPlayerScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            anim.SetBool("Fire", false);
+			anim.SetBool("Fire", false);
             timer += 1;
         }
         if (timer > 0)
@@ -398,61 +377,55 @@ public class OriginPlayerScript : MonoBehaviour
             InstantiateBullet();
         }
     }
+    */
 
     //default machine gun to fire at approx 400RPM
     void Fire3()
     {
         Debug.Log("Fire3");
         anim.SetBool("Fire", true);
+
         InvokeRepeating("InstantiateBullet", 0.2f, 0.15f);
+        
     }
 
     //Flamethrower weapon, needs a set range and parabolic motion
     void Fire4()
     {
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            timer += 1;
-        }
-        if (timer > 0)
-        {
-            Debug.Log("Fire4");
-            anim.SetBool("Fire", true);
-            InstantiateFlame();
-        }
-        //InvokeRepeating("InstantiateFlame", 0.2f, 0.75f);
+        Debug.Log("Fire4");
+        anim.SetBool("Fire", true);
+        InvokeRepeating("InstantiateFlame", 0.25f, 0.95f);
     }
 
     void Fire5()
     {
         Debug.Log("Fire5");
         anim.SetBool("Fire", true);
-        InvokeRepeating("InstantiateBullet", 0.05f, 0.95f);
+        InvokeRepeating("InstantiateBullet", 0.25f, 0.95f);
     }
 
     void WeaponController()
     {
         Debug.Log("Weapon controller switch");
-        if (weaponToggleKey == "Fire2")
+        if (weaponToggleKey == "Fire3")
         {
             if (!IsInvoking("InstantiateBullet"))
             {
-                Fire2();
+                Fire3();
             }
         }
         else if (weaponToggleKey == "Fire4")
         {
             if (!IsInvoking("InstantiateBullet"))
-            {
+            {     
                 Fire4();
             }
         }
-        else if (weaponToggleKey == "Fire")
+        else if (weaponToggleKey == "Fire5")
         {
             if (!IsInvoking("InstantiateBullet"))
             {
-                Fire();
+                Fire5();
             }
         }
     }
@@ -460,11 +433,10 @@ public class OriginPlayerScript : MonoBehaviour
 
     void WeaponToggle()
     {
-
         if (Input.GetKeyDown(KeyCode.Z))
         {
             Debug.Log("Weapon Switched to 1");
-            weaponToggleKey = "Fire2";
+            weaponToggleKey = "Fire3";
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
@@ -474,7 +446,7 @@ public class OriginPlayerScript : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.C))
         {
             Debug.Log("Weapon Switched to 3");
-            weaponToggleKey = "Fire";
+            weaponToggleKey = "Fire5";
         }
     }
 
@@ -505,13 +477,13 @@ public class OriginPlayerScript : MonoBehaviour
 
         if (facingRight)
         {
-            Clone.GetComponent<SpriteRenderer>().flipX = true;
-            Clone.GetComponent<Rigidbody>().AddForce(Vector2.right.normalized * bulletSpeed, ForceMode.Impulse);
+			Clone.GetComponent<SpriteRenderer>().flipX = true;           
+			Clone.GetComponent<Rigidbody>().AddForce(Vector2.right.normalized * bulletSpeed, ForceMode.Impulse);
 
         }
         else
         {
-            Clone.GetComponent<SpriteRenderer>().flipX = false;
+			Clone.GetComponent<SpriteRenderer>().flipX = false;
             Clone.GetComponent<Rigidbody>().AddForce(Vector2.left.normalized * bulletSpeed, ForceMode.Impulse);
 
         }
@@ -541,13 +513,13 @@ public class OriginPlayerScript : MonoBehaviour
         Debug.Log("Firing Flame");
         if (facingRight)
         {
-            CloneFlame.GetComponent<SpriteRenderer>().flipX = true;
-            CloneFlame.GetComponent<Rigidbody>().AddForce(new Vector2(1, 1) * flameSpeed, ForceMode.Impulse);
+			CloneFlame.GetComponent<SpriteRenderer>().flipX = true;
+			CloneFlame.GetComponent<Rigidbody>().AddForce(new Vector2(1,1) * flameSpeed, ForceMode.Impulse);
         }
         else
         {
-            CloneFlame.GetComponent<SpriteRenderer>().flipX = false;
-            CloneFlame.GetComponent<Rigidbody>().AddForce(new Vector2(-1, 1) * flameSpeed, ForceMode.Impulse);
+			CloneFlame.GetComponent<SpriteRenderer>().flipX = false;
+			CloneFlame.GetComponent<Rigidbody>().AddForce(new Vector2(-1, 1) * flameSpeed, ForceMode.Impulse);
         }
     }
 
@@ -595,7 +567,6 @@ public class OriginPlayerScript : MonoBehaviour
         }
     }
     //checks for DAMAGING Object OR ENEMY Object 
-
     void OnCollisionStay(Collision col) //checks stay because player wont reenter
     {
         if (col.gameObject.tag == "ground")
