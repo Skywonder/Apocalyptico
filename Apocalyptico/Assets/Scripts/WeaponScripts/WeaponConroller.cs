@@ -32,7 +32,11 @@ public class WeaponConroller : MonoBehaviour {
         //start counting time to know when reload takes place
         gunTimer += Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetMouseButton(0)
+            || (Input.GetMouseButton(0) && Input.GetKey(KeyCode.W))
+            || (Input.GetMouseButton(0) && Input.GetKey(KeyCode.A))
+            || (Input.GetMouseButton(0) && Input.GetKey(KeyCode.S))
+            || (Input.GetMouseButton(0) && Input.GetKey(KeyCode.D)))
         {
             Debug.Log("fire version 1");
             //call method that controls the current selected weapon
@@ -44,7 +48,7 @@ public class WeaponConroller : MonoBehaviour {
                 gunTimer = 0f;
             }
         }
-        else if (Input.GetKeyUp(KeyCode.F))
+        else if (!Input.GetMouseButton(0))
         {
             //cancel the repeating invoking of bullets AND method that calls it
             CancelInvoke("WeaponController");
@@ -153,14 +157,16 @@ public class WeaponConroller : MonoBehaviour {
     //Allow the instantiation of bullet...or whatever comes out
     void InstantiateBullet()
     {
-        GameObject Clone;
 
-        //instantiate the bullet in the direction the cursor is pointing
-        Clone = (Instantiate(bullet, GetComponent<Arm>().transform.position, 
-            Quaternion.identity)) as GameObject;
-
+        //if player still has bullets to fire
         if (defaultWeaponMagazine > 0)
         {
+            GameObject Clone;
+
+            //instantiate the bullet in the direction the cursor is pointing
+            Clone = (Instantiate(bullet, GetComponent<Arm>().transform.position,
+                Quaternion.identity)) as GameObject;
+
             Vector2 armVector = GetComponent<Arm>().differenceVector;
            
             //add force to the bullet in the direction of the cursor
@@ -169,6 +175,7 @@ public class WeaponConroller : MonoBehaviour {
             defaultWeaponMagazine--;
         }
     }
+
     //Allow the instantiation of bullet...or whatever comes out
     //cannon still needs to have cursor direction changes.
     void InstantiateCannon()

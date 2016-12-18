@@ -188,7 +188,7 @@ public class JohnPlayerScript : MonoBehaviour {
 
         //movement and action
         //Control Scheme Right arrow
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
             anim.SetBool("Idle", false);
             Debug.Log("going right");
@@ -219,7 +219,7 @@ public class JohnPlayerScript : MonoBehaviour {
 
 
         //Control Scheme left arrow
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
         {
             anim.SetBool("Idle", false);
             facingRight = false;
@@ -250,7 +250,7 @@ public class JohnPlayerScript : MonoBehaviour {
 
 
         //checking crouching condition
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.S))
         {
             if (isOnGround)
             {
@@ -271,7 +271,7 @@ public class JohnPlayerScript : MonoBehaviour {
 
 
         //jump
-        if (Input.GetKey(KeyCode.Space) )
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W))
         {
 			if (!crouching && isOnGround)
 			{	
