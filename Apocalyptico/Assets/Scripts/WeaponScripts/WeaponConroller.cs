@@ -9,6 +9,7 @@ public class WeaponConroller : MonoBehaviour {
     public string weaponToggleKey;
     public int defaultWeaponMagazine;
     public float gunTimer;
+    public float reloadTime;
 
     public int bulletSpeed = 100;
 
@@ -19,8 +20,9 @@ public class WeaponConroller : MonoBehaviour {
 
         //set default magazine size
         defaultWeaponMagazine = 30;
-        
-        //set reload time to 0
+
+        reloadTime = 3.5f;
+        //set time to 0
         gunTimer = 0f;
 
     }
@@ -28,6 +30,9 @@ public class WeaponConroller : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         WeaponToggle();
+
+        //get current magazine size
+        getMagazineSize();
 
         //start counting time to know when reload takes place
         gunTimer += Time.deltaTime;
@@ -86,11 +91,22 @@ public class WeaponConroller : MonoBehaviour {
         InvokeRepeating("InstantiateCannon", 0.25f, 0.95f);
     }
 
+    void setMagazine(int reloadAmount)
+    {
+        defaultWeaponMagazine = reloadAmount;
+
+    }
+    
+    public int getMagazineSize()
+    {
+        return defaultWeaponMagazine;
+    }
+
     void Reload()
     {
         if (gunTimer >= 3.5)
         {
-            defaultWeaponMagazine = 30;
+            setMagazine(30);
             //need to set to previous selected gun
             weaponToggleKey = "Fire3";
         }
@@ -148,9 +164,12 @@ public class WeaponConroller : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.R))
         {
             //add previous state feature to prevent reloading twice!!!!!!!!
-            gunTimer = 0f;
-            Debug.Log("Weapon Switched to Reload");
-            weaponToggleKey = "Reload";
+            if (weaponToggleKey != "Reload")
+            {
+                gunTimer = 0f;
+                Debug.Log("Weapon Switched to Reload");
+                weaponToggleKey = "Reload";
+            }
         }
     }
 

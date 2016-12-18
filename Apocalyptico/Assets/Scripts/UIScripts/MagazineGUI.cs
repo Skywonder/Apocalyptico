@@ -18,7 +18,7 @@ public class MagazineGUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentMagSize = (int)player.GetComponent<WeaponConroller>().defaultWeaponMagazine;
+        currentMagSize = (int)player.GetComponent<WeaponConroller>().getMagazineSize();
         text.text = "Magazine Size: " + (currentMagSize);
         Debug.Log("Magazine Size: " + currentMagSize);
     }
