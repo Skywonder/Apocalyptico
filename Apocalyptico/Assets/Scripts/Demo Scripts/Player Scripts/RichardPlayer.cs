@@ -17,7 +17,7 @@ public class RichardPlayer : MonoBehaviour
     float velocityXSmoothing;
 
     private bool hit;
-    private float invicibleTimer = 2.0f;
+    public float invicibleTimer = 2.0f;
 
     RichardController controller;
 
@@ -35,9 +35,12 @@ public class RichardPlayer : MonoBehaviour
         if (hit)
         {
             invicibleTimer -= Time.deltaTime;
+            GetComponent<SpriteRenderer>().enabled = !GetComponent<SpriteRenderer>().enabled;
             if (invicibleTimer <= 0)
             {
                 GetComponent<BoxCollider2D>().isTrigger = true;
+                GetComponent<SpriteRenderer>().enabled = true;
+                hit = false;
                 invicibleTimer = 2.0f;
             }
         }
@@ -72,8 +75,9 @@ public class RichardPlayer : MonoBehaviour
 
         if (hp <= 0)
         {
+            Camera.main.transform.parent = null;
             Destroy(gameObject);
-        } 
+        }
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -82,13 +86,12 @@ public class RichardPlayer : MonoBehaviour
         {
             hit = true;
             GetComponent<BoxCollider2D>().isTrigger = false;
-            hp -= 1;
+            hp--;
         }
 
         if (coll.gameObject.tag == "Obstacle")
         {
-            Camera.main.transform.parent = null; // until camera gets its own script
-            Destroy(gameObject);
+            hp = 0;
         }
     }
 }

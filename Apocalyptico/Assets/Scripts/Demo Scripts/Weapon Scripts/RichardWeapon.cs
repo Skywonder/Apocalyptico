@@ -6,19 +6,20 @@ public class RichardWeapon : MonoBehaviour {
     public Vector3 differenceVector;
 
     public GameObject bullet;
-    public float setCooldown = .5f;
     public float magazine = 70f;
+    public float setMagazine = 70f;
     public float fireRate = 0.2f;
     public float lastFire = 0f;
 
+    public string currentWeapon;
+
     private GameObject newBullet;
     private Vector3 offset;
-    private float cooldown;
 
     // Use this for initialization
     void Start()
     {
-        cooldown = 0f;
+        currentWeapon = "Machine Gun";
     }
 
     // Update is called once per frame
