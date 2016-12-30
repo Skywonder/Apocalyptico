@@ -12,6 +12,6 @@ public class MagazineUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GetComponent<Text>().text = weapon.GetComponent<RichardWeapon>().magazine + "/" + weapon.GetComponent<RichardWeapon>().setMagazine;
+        //GetComponent<Text>().text = weapon.GetComponent<RichardWeapon>().magazine + "/" + weapon.GetComponent<RichardWeapon>().setMagazine;
     }
 }
