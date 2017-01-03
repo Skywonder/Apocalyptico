@@ -9,7 +9,7 @@ public class Patroller : MonoBehaviour {
     float moveSpeed = 7;
     float gravity;
 
-    WalkerController controller;
+    EnemyController controller;
     
     private bool hit = false;
     private float startPointX;
@@ -21,7 +21,7 @@ public class Patroller : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        controller = GetComponent<WalkerController>();
+        controller = GetComponent<EnemyController>();
 
         gravity = -10;
 
@@ -57,6 +57,7 @@ public class Patroller : MonoBehaviour {
 
         if (hp <= 0)
         {
+            tag = "Untagged";
             hit = true;
             anim.SetBool("Hit", true);
             Destroy(gameObject, 0.75f);

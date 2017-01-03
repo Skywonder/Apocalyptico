@@ -7,7 +7,7 @@ public class Chaser : MonoBehaviour {
     float moveSpeed = 11;
     float gravity;
 
-    WalkerController controller;
+    EnemyController controller;
 
     private Transform player;
     private bool hit = false;
@@ -17,7 +17,7 @@ public class Chaser : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        controller = GetComponent<WalkerController>();
+        controller = GetComponent<EnemyController>();
 
         gravity = -10;
 
@@ -44,6 +44,7 @@ public class Chaser : MonoBehaviour {
 
         if (hp <= 0)
         {
+            tag = "Untagged";
             hit = true;
             anim.SetBool("Hit", true);
             Destroy(gameObject, 0.75f);

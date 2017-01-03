@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RichardWeapon : MonoBehaviour {
+public class RichardWeapon : MonoBehaviour
+{
     public float rotationZAxis;
     public Vector3 differenceVector;
 
@@ -38,7 +39,8 @@ public class RichardWeapon : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             currentWeapon = "Machine Gun";
-        } else if (Input.GetKeyDown(KeyCode.Alpha2))
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             currentWeapon = "Cannon";
         }
@@ -46,13 +48,12 @@ public class RichardWeapon : MonoBehaviour {
         // Weapon Reload
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (currentWeapon == "Machine Gun")
-            {
-                machineGun.Reload();
-            } else if (currentWeapon == "Cannon")
-            {
-                cannon.Reload();
-            }
+            StartCoroutine("Reload");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            StopCoroutine("Reload");
         }
 
         // Weapon Fire
@@ -67,6 +68,20 @@ public class RichardWeapon : MonoBehaviour {
             {
                 cannon.Fire();
             }
+        }
+    }
+
+    IEnumerator Reload()
+    {
+        if (currentWeapon == "Machine Gun")
+        {
+            yield return new WaitForSeconds(3f);
+            machineGun.Reload();
+        }
+        else if (currentWeapon == "Cannon")
+        {
+            yield return new WaitForSeconds(3f);
+            cannon.Reload();
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class WalkerController : MonoBehaviour {
+public class EnemyController : MonoBehaviour {
     public LayerMask groundMask;
-    public LayerMask playerMask;
 
     const float skinWidth = .015f;
     public int horizontalRayCount = 4;
@@ -24,11 +24,6 @@ public class WalkerController : MonoBehaviour {
     {
         boxColl = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
-    }
-
-    public void PlayerCollision()
-    {
-        //RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.forward, rayLength, playerMask);
     }
 
     public void Move(Vector3 velocity)
