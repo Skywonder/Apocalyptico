@@ -19,6 +19,11 @@ public class EnemyInfSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         if (Vector2.Distance(transform.position, player.position) <= 15)
         {
             spawnTime -= Time.deltaTime;
@@ -36,5 +41,13 @@ public class EnemyInfSpawner : MonoBehaviour {
         yield return new WaitForSeconds(0.3f);
         newEnemy = (GameObject)Instantiate(enemy, transform.position, Quaternion.identity);
         anim.SetBool("Spawn", false);
+    }
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag == "Bullet")
+        {
+            hp -= 1;
+        }
     }
 }
