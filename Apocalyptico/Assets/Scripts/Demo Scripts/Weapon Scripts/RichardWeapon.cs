@@ -13,6 +13,7 @@ public class RichardWeapon : MonoBehaviour
     public float fireRate = 0.2f;
     public float lastFire = 0f;
 
+    public bool reloading = false;
     public string currentWeapon;
 
     // Use this for initialization
@@ -54,6 +55,7 @@ public class RichardWeapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2))
         {
             StopCoroutine("Reload");
+            reloading = false;
         }
 
         // Weapon Fire
@@ -75,13 +77,17 @@ public class RichardWeapon : MonoBehaviour
     {
         if (currentWeapon == "Machine Gun")
         {
+            reloading = true;
             yield return new WaitForSeconds(3f);
             machineGun.Reload();
+            reloading = false;
         }
         else if (currentWeapon == "Cannon")
         {
+            reloading = true;
             yield return new WaitForSeconds(3f);
             cannon.Reload();
+            reloading = false;
         }
     }
 }

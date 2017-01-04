@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Obstacle
   - Bullet
+  - Dead
   layers:
   - Default
   - TransparentFX

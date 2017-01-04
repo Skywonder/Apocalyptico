@@ -12,6 +12,18 @@ public class MagazineUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //GetComponent<Text>().text = weapon.GetComponent<RichardWeapon>().magazine + "/" + weapon.GetComponent<RichardWeapon>().setMagazine;
+        if (weapon.GetComponent<RichardWeapon>().reloading)
+        {
+            GetComponent<Text>().text = "Reloading";
+        } else
+        {
+            if (weapon.GetComponent<RichardWeapon>().currentWeapon == "Machine Gun")
+            {
+                GetComponent<Text>().text = weapon.GetComponent<MachineGun>().magazine + "/" + weapon.GetComponent<MachineGun>().setMagazine;
+            } else if (weapon.GetComponent<RichardWeapon>().currentWeapon == "Cannon")
+            {
+                GetComponent<Text>().text = weapon.GetComponent<Cannon>().magazine + "/" + weapon.GetComponent<Cannon>().setMagazine;
+            }
+        }
     }
 }
