@@ -28,7 +28,12 @@ public class DefaultBullet : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag != "Player")
+        if (coll.gameObject.tag == "Enemy")
+        {
+            coll.gameObject.GetComponent<EnemyHP>().hp--;
+        }
+
+        if (coll.gameObject.tag != "Player" && coll.gameObject.tag != "Dead")
         {
             Destroy(gameObject);
         }

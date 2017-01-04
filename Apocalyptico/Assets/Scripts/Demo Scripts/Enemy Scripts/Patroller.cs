@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class Patroller : MonoBehaviour {
-
-    public int hp = 1;
     public float distanceX;
 
     float moveSpeed = 7;
@@ -55,9 +53,9 @@ public class Patroller : MonoBehaviour {
             controller.Move(move * Time.deltaTime);
         }
 
-        if (hp <= 0)
+        if (GetComponent<EnemyHP>().hp <= 0)
         {
-            tag = "Untagged";
+            tag = "Dead";
             hit = true;
             anim.SetBool("Hit", true);
             Destroy(gameObject, 0.75f);
@@ -68,14 +66,10 @@ public class Patroller : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Player")
         {
+            tag = "Dead";
             hit = true;
             anim.SetBool("Hit", true);
             Destroy(gameObject, 0.75f);
-        }
-
-        if (coll.gameObject.tag == "Bullet")
-        {
-            hp -= 1;
         }
     }
 }

@@ -28,14 +28,12 @@ public class CannonBall : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        // Attempt to make it into aoe (did not work)
-        /*if (coll.gameObject.tag == "Enemy")
+        if (coll.gameObject.tag == "Enemy")
         {
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            GetComponent<BoxCollider2D>().size = new Vector2(2.5f, 2.5f);
-        }*/
+            coll.gameObject.GetComponent<EnemyHP>().hp -= 3;
+        }
 
-        if (coll.gameObject.tag != "Player")
+        if (coll.gameObject.tag != "Player" && coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Dead")
         {
             Destroy(gameObject);
         }

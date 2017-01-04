@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4717873645987030}
   - component: {fileID: 212246126678156570}
   - component: {fileID: 114506814651294688}
+  - component: {fileID: 114788175455109216}
   - component: {fileID: 114728804948606736}
   - component: {fileID: 95808905955409596}
   - component: {fileID: 61840869383490216}
@@ -86,7 +87,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b186aebb5bdfe7b4da1fe5286a194201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
 --- !u!114 &114728804948606736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,11 +101,20 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 16384
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 8192
   horizontalRayCount: 4
   verticalRayCount: 4
+--- !u!114 &114788175455109216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1954247747239076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c00409ccf73734582670f66b62f69a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 3
 --- !u!212 &212246126678156570
 SpriteRenderer:
   m_ObjectHideFlags: 1
