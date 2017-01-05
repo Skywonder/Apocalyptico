@@ -12,4 +12,10 @@ public class Weapon : MonoBehaviour {
     {
         Debug.Log("Weapon Reload");
     }
+
+    public virtual bool FullClip()
+    {
+        Debug.Log("Full Clip Check");
+        return true;
+    }
 }

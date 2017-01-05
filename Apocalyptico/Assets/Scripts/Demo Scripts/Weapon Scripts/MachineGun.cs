@@ -23,4 +23,9 @@ public class MachineGun : Weapon {
     {
         magazine = setMagazine;
     }
+
+    public override bool FullClip()
+    {
+        return magazine == setMagazine;
+    }
 }

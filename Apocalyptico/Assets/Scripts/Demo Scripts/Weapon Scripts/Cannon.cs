@@ -7,6 +7,7 @@ public class Cannon : Weapon {
 
     public float magazine = 1f;
     public float setMagazine = 1f;
+    public float ammo = 1f;
     
     private GameObject newBullet;
     
@@ -22,5 +23,10 @@ public class Cannon : Weapon {
     public override void Reload()
     {
         magazine = setMagazine;
+    }
+
+    public override bool FullClip()
+    {
+        return magazine == setMagazine;
     }
 }
