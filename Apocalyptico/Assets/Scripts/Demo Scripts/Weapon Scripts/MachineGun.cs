@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MachineGun : MonoBehaviour {
+public class MachineGun : Weapon {
     public GameObject bullet;
 
     public float magazine = 70f;
@@ -10,16 +10,7 @@ public class MachineGun : MonoBehaviour {
 
     private GameObject newBullet;
 
-    // Use this for initialization
-    void Start () {
-    }
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
-
-    public void Fire()
+    public override void Fire()
     {
         if (magazine != 0)
         {
@@ -28,7 +19,7 @@ public class MachineGun : MonoBehaviour {
         }
     }
 
-    public void Reload()
+    public override void Reload()
     {
         magazine = setMagazine;
     }

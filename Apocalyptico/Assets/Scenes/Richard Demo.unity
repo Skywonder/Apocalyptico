@@ -2401,11 +2401,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4593752406256704, guid: 485ef861bdcea7245a82b5364d802eaf, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 71.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4593752406256704, guid: 485ef861bdcea7245a82b5364d802eaf, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 34.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4593752406256704, guid: 485ef861bdcea7245a82b5364d802eaf, type: 2}
       propertyPath: m_LocalPosition.z

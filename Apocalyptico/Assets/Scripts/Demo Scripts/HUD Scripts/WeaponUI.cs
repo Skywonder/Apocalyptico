@@ -12,6 +12,6 @@ public class WeaponUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GetComponent<Text>().text = weapon.GetComponent<RichardWeapon>().currentWeapon;
+        GetComponent<Text>().text = weapon.GetComponent<RichardWeapon>().currentWeapon.name;
     }
 }

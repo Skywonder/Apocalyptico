@@ -17,10 +17,10 @@ public class MagazineUI : MonoBehaviour {
             GetComponent<Text>().text = "Reloading";
         } else
         {
-            if (weapon.GetComponent<RichardWeapon>().currentWeapon == "Machine Gun")
+            if (weapon.GetComponent<RichardWeapon>().currentWeapon.name == "Machine Gun")
             {
                 GetComponent<Text>().text = weapon.GetComponent<MachineGun>().magazine + "/" + weapon.GetComponent<MachineGun>().setMagazine;
-            } else if (weapon.GetComponent<RichardWeapon>().currentWeapon == "Cannon")
+            } else if (weapon.GetComponent<RichardWeapon>().currentWeapon.name == "Cannon")
             {
                 GetComponent<Text>().text = weapon.GetComponent<Cannon>().magazine + "/" + weapon.GetComponent<Cannon>().setMagazine;
             }
