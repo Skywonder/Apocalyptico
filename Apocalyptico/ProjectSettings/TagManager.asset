@@ -12,6 +12,7 @@ TagManager:
   - Obstacle
   - Bullet
   - Dead
+  - Ammo
   layers:
   - Default
   - TransparentFX

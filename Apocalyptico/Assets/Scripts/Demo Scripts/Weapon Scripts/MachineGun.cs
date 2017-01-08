@@ -28,4 +28,9 @@ public class MachineGun : Weapon {
     {
         return magazine == setMagazine;
     }
+
+    public override bool AmmoCheck()
+    {
+        return base.AmmoCheck();
+    }
 }

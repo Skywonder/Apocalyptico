@@ -23,10 +23,16 @@ public class Cannon : Weapon {
     public override void Reload()
     {
         magazine = setMagazine;
+        ammo--;
     }
 
     public override bool FullClip()
     {
         return magazine == setMagazine;
+    }
+
+    public override bool AmmoCheck()
+    {
+        return ammo > 0f;
     }
 }
