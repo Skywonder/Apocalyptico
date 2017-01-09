@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Shooter : MonoBehaviour {
+public class Shooter2 : MonoBehaviour {
     public int hp = 1;
 
     float moveSpeed = 7f;
