@@ -32,7 +32,7 @@ public class RichardWeapon : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, rotationZAxis);
 
         // Weapon Reload
-        if (Input.GetKeyDown(KeyCode.R) && !currentWeapon.FullClip())
+        if (Input.GetKeyDown(KeyCode.R) && !currentWeapon.FullClip() && currentWeapon.AmmoCheck() && !reloading)
         {
             StartCoroutine("Reload");
         }

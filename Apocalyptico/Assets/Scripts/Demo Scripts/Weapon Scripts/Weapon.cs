@@ -18,4 +18,10 @@ public class Weapon : MonoBehaviour {
         Debug.Log("Full Clip Check");
         return true;
     }
+
+    public virtual bool AmmoCheck()
+    {
+        Debug.Log("Enough Ammo Check");
+        return true;
+    }
 }
