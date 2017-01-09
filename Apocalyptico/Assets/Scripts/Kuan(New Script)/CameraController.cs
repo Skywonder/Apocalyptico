@@ -4,48 +4,40 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-    [SerializeField]
-    Transform character;
+    public Transform Player;
+    public Vector2 Margin;
+    public Vector2 Smoothing;
+    public BoxCollider2D Bounds;
+    private Vector3 _min, _max;
 
-    public float startz;
-    private Vector3 moveTemp;
-    [SerializeField]
-    float speed = 3;
-    [SerializeField]
-    float xDifference;
-    [SerializeField]
-    float yDifference;
+    public bool IsFollowing { get; set; }
 
-    [SerializeField]
-    float movementThreshold = 3;
-    
-	// Update is called once per frame
-	void Update () {
+    public void Start()
+    {
+        _min = Bounds.bounds.min;
+        _max = Bounds.bounds.max;
+        IsFollowing = true;
+    }
 
-        if (character.transform.position.x > transform.position.x)
+    public void Update()
+    {
+        var x = transform.position.x;
+        var y = transform.position.y;
+
+        if (IsFollowing)
         {
-            xDifference = character.transform.position.x - transform.position.x;
+            if (Mathf.Abs(x - Player.position.x) > Margin.x) {
+                x = Mathf.Lerp(x, Player.position.x, Smoothing.x * Time.deltaTime);
+            }
+            if (Mathf.Abs(y - Player.position.y) > Margin.y) {
+                y = Mathf.Lerp(y, Player.position.y, Smoothing.y * Time.deltaTime);
+            }
         }
-        else
-        {
-            xDifference = transform.position.x - character.transform.position.x;
+        var cameraHalfWidth = GetComponent<Camera>().orthographicSize * ((float)Screen.width / Screen.height);
+        x = Mathf.Clamp(x, _min.x + cameraHalfWidth, _max.x - cameraHalfWidth);
+        y = Mathf.Clamp(y, _min.y + GetComponent<Camera>().orthographicSize, _max.y - GetComponent<Camera>().orthographicSize);
 
-        }
+        transform.position = new Vector3(x, y, transform.position.z);
+    }
 
-        if (character.transform.position.y > transform.position.y)
-        {
-            yDifference = character.transform.position.y - transform.position.y;
-        }
-        else
-        {
-            yDifference = transform.position.y - character.transform.position.y;
-        }
-
-        if (xDifference >= movementThreshold || yDifference >= movementThreshold)
-        {
-            moveTemp = character.transform.position;
-            //moveTemp.y = 1;
-            transform.position = Vector3.MoveTowards(new Vector3(transform.position.x, transform.position.y, startz), moveTemp, speed * Time.deltaTime);
-        }
-	}
 }
