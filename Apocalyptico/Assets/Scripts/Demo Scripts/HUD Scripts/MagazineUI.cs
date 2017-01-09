@@ -7,20 +7,23 @@ public class MagazineUI : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
-	}
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (weapon.GetComponent<RichardWeapon>().reloading)
         {
             GetComponent<Text>().text = "Reloading";
-        } else
+        }
+        else
         {
+            Debug.Log(weapon.GetComponent<RichardWeapon>().currentWeapon.name);
             if (weapon.GetComponent<RichardWeapon>().currentWeapon.name == "Machine Gun")
             {
                 GetComponent<Text>().text = weapon.GetComponent<MachineGun>().magazine + "/" + weapon.GetComponent<MachineGun>().setMagazine;
-            } else if (weapon.GetComponent<RichardWeapon>().currentWeapon.name == "Cannon")
+            }
+            else if (weapon.GetComponent<RichardWeapon>().currentWeapon.name == "Cannon")
             {
                 GetComponent<Text>().text = weapon.GetComponent<Cannon>().magazine + "/" + weapon.GetComponent<Cannon>().setMagazine;
             }

@@ -13,6 +13,6 @@ public class HealthUI : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Text>().text = "Player Health: " + player.GetComponent<RichardPlayer>().hp;
+        GetComponent<Text>().text = "HP: " + player.GetComponent<RichardPlayer>().hp;
     }
 }
