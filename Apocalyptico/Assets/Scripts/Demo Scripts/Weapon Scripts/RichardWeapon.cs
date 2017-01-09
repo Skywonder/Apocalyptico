@@ -12,12 +12,13 @@ public class RichardWeapon : MonoBehaviour
 
     public bool reloading = false;
     public Weapon currentWeapon;
+    public string currentName;
 
     // Use this for initialization
     void Start()
     {
         currentWeapon = GetComponent<MachineGun>();
-        currentWeapon.name = "Machine Gun";
+        currentName = "Machine Gun";
     }
 
     // Update is called once per frame
@@ -37,7 +38,7 @@ public class RichardWeapon : MonoBehaviour
             StartCoroutine("Reload");
         }
 
-        if ((currentWeapon.name == "Cannon" && Input.GetKeyDown(KeyCode.Alpha1)) || (currentWeapon.name == "Machine Gun" && Input.GetKeyDown(KeyCode.Alpha2)))
+        if ((currentName == "Cannon" && Input.GetKeyDown(KeyCode.Alpha1)) || (currentName == "Machine Gun" && Input.GetKeyDown(KeyCode.Alpha2)))
         {
             StopCoroutine("Reload");
             reloading = false;
@@ -47,12 +48,12 @@ public class RichardWeapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             currentWeapon = GetComponent<MachineGun>();
-            currentWeapon.name = "Machine Gun";
+            currentName = "Machine Gun";
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             currentWeapon = GetComponent<Cannon>();
-            currentWeapon.name = "Cannon";
+            currentName = "Cannon";
         }
 
         // Weapon Fire

@@ -19,11 +19,11 @@ public class MagazineUI : MonoBehaviour {
         else
         {
             Debug.Log(weapon.GetComponent<RichardWeapon>().currentWeapon.name);
-            if (weapon.GetComponent<RichardWeapon>().currentWeapon.name == "Machine Gun")
+            if (weapon.GetComponent<RichardWeapon>().currentName == "Machine Gun")
             {
                 GetComponent<Text>().text = weapon.GetComponent<MachineGun>().magazine + "/" + weapon.GetComponent<MachineGun>().setMagazine;
             }
-            else if (weapon.GetComponent<RichardWeapon>().currentWeapon.name == "Cannon")
+            else if (weapon.GetComponent<RichardWeapon>().currentName == "Cannon")
             {
                 GetComponent<Text>().text = weapon.GetComponent<Cannon>().magazine + "/" + weapon.GetComponent<Cannon>().setMagazine;
             }
