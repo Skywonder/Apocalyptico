@@ -16,7 +16,7 @@ public class RichardPlayer : MonoBehaviour
     Vector3 velocity;
     float velocityXSmoothing;
 
-    private bool hit;
+    public bool hit;
     public float invicibleTimer = 2.0f;
 
     RichardController controller;
@@ -43,6 +43,9 @@ public class RichardPlayer : MonoBehaviour
                 hit = false;
                 invicibleTimer = 2.0f;
             }
+        } else
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
         }
 
         if (controller.collisions.above || controller.collisions.below)

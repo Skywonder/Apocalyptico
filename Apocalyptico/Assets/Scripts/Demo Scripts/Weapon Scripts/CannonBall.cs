@@ -33,7 +33,7 @@ public class CannonBall : MonoBehaviour {
             coll.gameObject.GetComponent<EnemyHP>().hp -= 3;
         }
 
-        if (coll.gameObject.tag != "Player" && coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Dead")
+        if (coll.gameObject.tag != "Player" && coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Dead" && coll.gameObject.tag != "Ammo")
         {
             Destroy(gameObject);
         }

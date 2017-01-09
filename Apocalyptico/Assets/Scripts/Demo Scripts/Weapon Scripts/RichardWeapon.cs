@@ -24,6 +24,14 @@ public class RichardWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.parent.GetComponent<RichardPlayer>().hit)
+        {
+            GetComponent<SpriteRenderer>().enabled = !GetComponent<SpriteRenderer>().enabled;
+        } else
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+        }
+
         //Arm Movement
         differenceVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         differenceVector.Normalize();
