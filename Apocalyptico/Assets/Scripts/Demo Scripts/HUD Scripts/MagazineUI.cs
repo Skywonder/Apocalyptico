@@ -25,7 +25,7 @@ public class MagazineUI : MonoBehaviour {
             }
             else if (weapon.GetComponent<RichardWeapon>().currentName == "Cannon")
             {
-                GetComponent<Text>().text = weapon.GetComponent<Cannon>().magazine + "/" + weapon.GetComponent<Cannon>().setMagazine;
+                GetComponent<Text>().text = weapon.GetComponent<Cannon>().magazine + "/" + weapon.GetComponent<Cannon>().ammo;
             }
         }
     }
