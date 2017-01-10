@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 1714515868393606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
   - {fileID: 4227004392695240}
   m_Father: {fileID: 0}
@@ -72,7 +72,7 @@ Transform:
   m_GameObject: {fileID: 1214037439264268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.009, y: 0.162, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4022418842093810}
   m_RootOrder: 0
@@ -157,8 +157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1000011124184396, guid: f215a2a97fc286b4bb67373ba9cd00de, type: 2}
-  magazine: 70
-  setMagazine: 70
+  magazine: 30
+  setMagazine: 30
 --- !u!114 &114779838811341398
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,8 +254,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 305852415
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 377d661be9221ae47816235eadfd7948, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

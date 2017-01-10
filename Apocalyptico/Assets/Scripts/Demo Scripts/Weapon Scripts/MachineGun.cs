@@ -5,8 +5,8 @@ using UnityEngine;
 public class MachineGun : Weapon {
     public GameObject bullet;
 
-    public float magazine = 70f;
-    public float setMagazine = 70f;
+    public float magazine = 30f;
+    public float setMagazine = 30f;
 
     private GameObject newBullet;
 

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Chaser : MonoBehaviour {
-    float moveSpeed = 11;
+    float moveSpeed = 10;
     float gravity;
 
     EnemyController controller;
@@ -53,7 +53,6 @@ public class Chaser : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Player")
         {
-            tag = "Dead";
             hit = true;
             anim.SetBool("Hit", true);
             Destroy(gameObject, 0.75f);

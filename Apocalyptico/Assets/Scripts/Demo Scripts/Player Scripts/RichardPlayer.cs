@@ -87,6 +87,7 @@ public class RichardPlayer : MonoBehaviour
     {
         if (coll.gameObject.tag == "Enemy")
         {
+            coll.gameObject.tag = "Dead";
             hit = true;
             GetComponent<BoxCollider2D>().isTrigger = false;
             hp--;

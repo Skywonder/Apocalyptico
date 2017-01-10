@@ -40,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1692037209507830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.76, y: -0.71, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1655460271037540, guid: e96bcaa93c2ceea4f89a213a6a03fa6f, type: 2}
-  spawnTime: 0
+  setSpawnTime: 3
 --- !u!114 &114121022185041924
 MonoBehaviour:
   m_ObjectHideFlags: 1

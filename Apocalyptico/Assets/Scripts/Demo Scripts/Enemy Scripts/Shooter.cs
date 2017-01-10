@@ -7,10 +7,11 @@ public class Shooter : MonoBehaviour {
     float gravity;
 
     public GameObject bullet;
-    public float spawnTime;
+    public float setSpawnTime = 3f;
 
     EnemyController controller;
 
+    private float spawnTime;
     private Transform player;
     private bool shooting = false;
     private bool dead = false;
@@ -60,6 +61,7 @@ public class Shooter : MonoBehaviour {
 
         if (GetComponent<EnemyHP>().hp <= 0)
         {
+            StopCoroutine("Shoot");
             tag = "Dead";
             dead = true;
             anim.SetBool("Dead", true);
@@ -96,7 +98,7 @@ public class Shooter : MonoBehaviour {
 
         anim.SetBool("Shoot", false);
         yield return new WaitForSeconds(.7f);
-        spawnTime = 3f;
+        spawnTime = setSpawnTime;
         shooting = false;
     }
 }

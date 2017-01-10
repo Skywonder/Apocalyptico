@@ -30,7 +30,7 @@ public class EnemyBullet : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Dead" && coll.gameObject.tag != "Ammo")
+        if (coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Dead" && coll.gameObject.tag != "Ammo" && coll.gameObject.tag != "Bullet")
         {
             Destroy(gameObject);
         }

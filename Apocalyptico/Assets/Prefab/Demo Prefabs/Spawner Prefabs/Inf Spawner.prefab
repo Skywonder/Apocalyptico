@@ -21,11 +21,12 @@ GameObject:
   - component: {fileID: 4357098066437476}
   - component: {fileID: 212236591989066344}
   - component: {fileID: 114651246236596254}
+  - component: {fileID: 114246435266517892}
   - component: {fileID: 95904919348757700}
   - component: {fileID: 61361586721302472}
   m_Layer: 9
   m_Name: Inf Spawner
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1276319868025130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.04, y: -1.33, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,6 +75,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114246435266517892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1276319868025130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c00409ccf73734582670f66b62f69a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 7
 --- !u!114 &114651246236596254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,7 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 3
   enemy: {fileID: 1000013426821658, guid: 5fb572eb7ef76fd498c2175db0458d89, type: 2}
-  spawnTime: 2.5
+  setSpawnTime: 1.5
+  spawnTime: 0
 --- !u!212 &212236591989066344
 SpriteRenderer:
   m_ObjectHideFlags: 1

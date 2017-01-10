@@ -75,7 +75,7 @@ public class RichardWeapon : MonoBehaviour
     IEnumerator Reload()
     {
         reloading = true;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         currentWeapon.Reload();
         reloading = false;
     }

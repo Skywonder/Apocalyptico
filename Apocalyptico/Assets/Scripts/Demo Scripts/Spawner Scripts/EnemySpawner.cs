@@ -6,19 +6,19 @@ public class EnemySpawner : MonoBehaviour {
     public float setSpawnTime;
     public int maxSpawn = 3;
 
+    public float spawnTime;
     private Transform player;
     private GameObject newEnemy;
-    private float spawnTime;
 
     // Use this for initialization
     void Start () {
 	    player = GameObject.Find("Player").transform;
-        spawnTime = setSpawnTime;
+        spawnTime = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (Vector2.Distance(transform.position, player.position) <= 20 && Vector2.Distance(transform.position, player.position) >= 15 && maxSpawn != 0)
+        if (Vector2.Distance(transform.position, player.position) <= 30 && Vector2.Distance(transform.position, player.position) >= 25 && maxSpawn != 0)
         {
             spawnTime -= Time.deltaTime;
             if (spawnTime <= 0)

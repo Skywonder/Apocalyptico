@@ -30,7 +30,7 @@ public class DefaultBullet : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Enemy")
         {
-            coll.gameObject.GetComponent<EnemyHP>().hp--;
+            coll.gameObject.GetComponent<EnemyHP>().hp -= 2;
         }
 
         if (coll.gameObject.tag != "Player" && coll.gameObject.tag != "Dead" && coll.gameObject.tag != "Ammo")
