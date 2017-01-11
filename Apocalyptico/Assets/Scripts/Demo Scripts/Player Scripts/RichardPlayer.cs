@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class RichardPlayer : MonoBehaviour
 {
-    public int hp = 3;
+    public int hp = 4;
 
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
