@@ -1,14 +1,15 @@
 fileFormatVersion: 2
-guid: d2c4799220d08ac499a3000031cda772
-timeCreated: 1477295847
+guid: 0733038c554c9d844a360e3d44057d12
+timeCreated: 1484121573
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
   fontSize: 16
-  forceTextureCase: -2
+  forceTextureCase: -1
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
+  fontName: Diediedie
   fontNames:
   - Diediedie
   fallbackFontReferences: []

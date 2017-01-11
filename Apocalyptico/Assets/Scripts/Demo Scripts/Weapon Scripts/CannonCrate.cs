@@ -22,7 +22,6 @@ public class CannonCrate : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Player")
         {
-            Debug.Log("Ammo");
             cannon.ammo += ammo;
             Destroy(gameObject);
         }
