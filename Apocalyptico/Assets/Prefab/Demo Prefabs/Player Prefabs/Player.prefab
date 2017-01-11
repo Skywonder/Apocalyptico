@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 114144271742983712}
   - component: {fileID: 61154786028455984}
   - component: {fileID: 50379688628947360}
+  - component: {fileID: 95321194076518818}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -57,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1714515868393606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 1, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
   - {fileID: 4227004392695240}
@@ -111,6 +112,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.66, y: 1.3}
+--- !u!95 &95321194076518818
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1714515868393606}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b5d2b880b21384f4d86b5ce452fc9fe6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114144271742983712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,11 +203,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5597a2e5c4fb1f4e890bda1d6fc439b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  hp: 3
   jumpHeight: 4
   timeToJumpApex: 0.4
   hit: 0
   invicibleTimer: 2
+  dead: 0
 --- !u!212 &212072956771007072
 SpriteRenderer:
   m_ObjectHideFlags: 1

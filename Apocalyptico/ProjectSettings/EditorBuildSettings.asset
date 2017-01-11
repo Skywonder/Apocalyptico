@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MainMenu.unity
+    path: Assets/Scenes/Game Demo/Main Menu.unity
   - enabled: 1
-    path: Assets/Scenes/Kuan (working scene).unity
-  - enabled: 0
-    path: Assets/Scenes/MenuScene.unity
+    path: Assets/Scenes/Game Demo/Demo.unity
+  - enabled: 1
+    path: Assets/Scenes/Game Demo/Game Over.unity
