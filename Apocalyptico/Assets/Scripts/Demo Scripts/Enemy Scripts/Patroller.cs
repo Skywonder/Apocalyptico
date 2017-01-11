@@ -15,10 +15,12 @@ public class Patroller : MonoBehaviour {
     private bool towardsEnd = false;
     private Vector2 move;
     Animator anim;
-
+    public AudioClip explodeSound;
+    private AudioSource source;
     // Use this for initialization
     void Start()
     {
+        source = GetComponent<AudioSource>();
         controller = GetComponent<EnemyController>();
 
         gravity = -10;
@@ -68,6 +70,7 @@ public class Patroller : MonoBehaviour {
         {
             tag = "Dead";
             hit = true;
+            source.PlayOneShot(explodeSound);
             anim.SetBool("Hit", true);
             Destroy(gameObject, 0.75f);
         }

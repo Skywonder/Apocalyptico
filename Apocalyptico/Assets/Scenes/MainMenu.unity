@@ -1,15 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
-SceneSettings:
+OcclusionCullingSettings:
   m_ObjectHideFlags: 0
-  m_PVSData: 
-  m_PVSObjectsArray: []
-  m_PVSPortalsArray: []
+  serializedVersion: 2
   m_OcclusionBakeSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -79,16 +79,17 @@ NavMeshSettings:
   m_ObjectHideFlags: 0
   m_BuildSettings:
     serializedVersion: 2
+    agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
-    accuratePlacement: 0
     minRegionArea: 2
-    cellSize: 0.16666667
     manualCellSize: 0
+    cellSize: 0.16666667
+    accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1001 &171122467
 Prefab:
@@ -197,6 +198,28 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1961385480}
+    - target: {fileID: 114000013723912792, guid: aa053fbd67636684caf0cc0927da1e65,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 07f0ed2c884256e40a103e7098228c5f,
+        type: 3}
+    - target: {fileID: 114000013723912792, guid: aa053fbd67636684caf0cc0927da1e65,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013209263420, guid: aa053fbd67636684caf0cc0927da1e65,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 0733038c554c9d844a360e3d44057d12,
+        type: 3}
+    - target: {fileID: 114000013209263420, guid: aa053fbd67636684caf0cc0927da1e65,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa053fbd67636684caf0cc0927da1e65, type: 2}
   m_IsPrefabParent: 0
@@ -205,13 +228,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1030144473}
-  - 20: {fileID: 1030144472}
-  - 92: {fileID: 1030144471}
-  - 124: {fileID: 1030144470}
-  - 81: {fileID: 1030144469}
+  - component: {fileID: 1030144473}
+  - component: {fileID: 1030144472}
+  - component: {fileID: 1030144471}
+  - component: {fileID: 1030144470}
+  - component: {fileID: 1030144469}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -283,20 +306,20 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1381409235
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1381409238}
-  - 114: {fileID: 1381409237}
-  - 114: {fileID: 1381409236}
+  - component: {fileID: 1381409238}
+  - component: {fileID: 1381409237}
+  - component: {fileID: 1381409236}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -345,10 +368,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1961385480 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000013926717216, guid: 4faf9ab4f867f854b8edbd153abac228,

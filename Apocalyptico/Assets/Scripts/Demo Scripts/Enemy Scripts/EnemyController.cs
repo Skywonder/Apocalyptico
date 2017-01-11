@@ -19,11 +19,14 @@ public class EnemyController : MonoBehaviour {
     RaycastOrigins raycastOrigins;
     public CollisionInfo collisions;
 
+ 
 
     void Start()
     {
+      
         boxColl = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
+
     }
 
     public void Move(Vector3 velocity)
@@ -179,6 +182,7 @@ public class EnemyController : MonoBehaviour {
 
         if (hit)
         {
+
             float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
             if (slopeAngle != 0 && slopeAngle <= maxDescendAngle)
             {

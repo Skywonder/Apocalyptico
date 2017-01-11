@@ -22,11 +22,15 @@ public class RichardPlayer : MonoBehaviour
 
     public bool dead = false;
 
+    public AudioClip deadSound;
+    private AudioSource source;
+
     RichardController controller;
     Animator anim;
 
     void Start()
     {
+        source = GetComponent<AudioSource>();
         controller = GetComponent<RichardController>();
         anim = GetComponent<Animator>();
 
@@ -109,6 +113,8 @@ public class RichardPlayer : MonoBehaviour
 
     IEnumerator Dead()
     {
+     
+        source.PlayOneShot(deadSound);
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<SpriteRenderer>().sortingLayerName = "frontTrees";
         dead = true;

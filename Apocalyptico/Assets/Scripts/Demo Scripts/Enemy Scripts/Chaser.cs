@@ -12,9 +12,13 @@ public class Chaser : MonoBehaviour {
     private Vector2 move;
     Animator anim;
 
+    public AudioClip explodeSound;
+    private AudioSource source;
+
     // Use this for initialization
     void Start()
     {
+        source = GetComponent<AudioSource>();
         controller = GetComponent<EnemyController>();
 
         gravity = -10;
@@ -53,6 +57,7 @@ public class Chaser : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Player")
         {
+            source.PlayOneShot(explodeSound);
             hit = true;
             anim.SetBool("Hit", true);
             Destroy(gameObject, 0.75f);

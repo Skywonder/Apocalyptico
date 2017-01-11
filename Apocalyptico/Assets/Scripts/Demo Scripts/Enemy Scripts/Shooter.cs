@@ -18,12 +18,14 @@ public class Shooter : MonoBehaviour {
     private Vector2 move;
     private float distanceX;
     private GameObject newBullet;
-
+    public AudioClip zombieSound;
+    private AudioSource source;
     Animator anim;
 
     // Use this for initialization
     void Start()
     {
+        source = GetComponent<AudioSource>();
         controller = GetComponent<EnemyController>();
 
         gravity = -10;
@@ -82,6 +84,7 @@ public class Shooter : MonoBehaviour {
 
     IEnumerator Shoot()
     {
+        source.PlayOneShot(zombieSound);
         shooting = true;
         anim.SetBool("Shoot", true);
         yield return new WaitForSeconds(1f);
